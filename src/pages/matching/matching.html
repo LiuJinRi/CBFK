@@ -1,0 +1,67 @@
+<!--
+  Generated template for the MatchingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <!--ion-title>绑定</ion-title-->
+    <ion-title>
+        <form [formGroup]="findForm" (ngSubmit)="doFind()">
+          <ion-item color="primary" no-lines>
+            <ion-label color="light" style="font-size: 2rem">绑定</ion-label>
+            <ion-input placeholder="请输入车架号" formControlName="searchtext" style="color: black; background-color: white;border-radius: 20px"></ion-input>
+            <button ion-button color="light" clear item-right type="submit">
+              <ion-icon style="font-size: 2em" name="search"></ion-icon>
+            </button>
+          </ion-item>
+        </form>         
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content nopadding> 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="下拉刷新"
+            refreshingSpinner="circles"
+            refreshingText="加载中...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+      <ion-item-sliding *ngFor = "let item of items">
+          <ion-item (click)="detail(item)">
+              <ion-avatar item-start>
+                  <img [src]="'http://114.116.82.170:8200/' + item.coverPic ||  'assets/imgs/car.jpg'">
+              </ion-avatar>  
+              <p>车 ID ：{{item.carId}}</p>
+              <p *ngIf="item.carType == 1">车种类 ：金融车</p>
+              <p *ngIf="item.carType == 2">车种类 ：门禁车</p>
+              <p>车牌号 ：{{item.carNumberPlate}}</p>
+              <p>车架号 : {{item.vincode}}</p>
+              <p>绑定日期 ：{{item.bindTime || '还没有绑定'}}</p>
+              <p>磨合编号 ：{{item.boxCode}}</p>
+
+          </ion-item>
+
+          <ion-item-options side="right">
+              <button ion-button color="caidan" (click)="unmatching(item)">解绑</button>
+              <button ion-button color="caidan" (click)="scan(item)" *ngIf="item.bindPersonName != null">扫描魔盒</button>
+          </ion-item-options> 
+          
+        </ion-item-sliding>
+    
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="加载更多">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "CBFK",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

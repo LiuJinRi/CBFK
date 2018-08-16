@@ -1,0 +1,44 @@
+<!--
+  Generated template for the MatchingDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      绑定详情
+    </ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="presentPopover($event)">
+          <ion-icon name="more"></ion-icon>
+        </button>
+      </ion-buttons> 
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding center text-center>
+    <img [src]="car.coverPic">  
+    <p>车牌号 ：{{car.carNumberPlate}}</p>
+    <p>车架号 : {{car.vincode}}</p>
+    <p>车辆颜色 ：{{car.color}}</p>
+    <p>品牌 ：{{car.brand}}</p>
+    <p *ngIf="car.status == 1">绑定情况 ：已绑定</p>
+    <p *ngIf="car.status == 2">绑定情况 ：解绑</p>
+    <p>绑定日期 ：{{car.bindTime || '还没有绑定'}}</p>
+    <p>绑定人 ：{{car.bindPersonName}}</p>
+    <p>磨合编号 ：{{car.boxCode}}</p>
+    <p *ngIf="car.isEnter == 1">在场情况 ：在场</p>
+    <p *ngIf="car.isEnter == 2">在场情况 ：不在场</p>
+    <p *ngIf="car.isInStock == 1">在库情况 ：在库</p>
+    <p *ngIf="car.isInStock == 2">在库情况 ：不在库</p>
+    <p>设备码 ：{{car.boxCode}}</p>
+    <p>车辆等级 ：{{car.dangerLevel}}</p>
+    <p>贷款金额 ：{{car.loanAmount}}</p>
+    <p>还款时间 ：{{car.repaymentTime}}</p>
+    <p>商铺号 ：{{car.shopNumber}}</p>
+    <p>合同人 ：{{car.shopContractorName}}</p>
+    <p>合同人电话 ：{{car.contactNumber}}</p>
+</ion-content>

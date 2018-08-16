@@ -1,0 +1,51 @@
+<!--
+  Generated template for the MinePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>我</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item >
+      <ion-avatar item-start>
+        <img [src]="'assets/imgs/person.jpg'">
+      </ion-avatar>  
+      <p>{{userName}}</p>
+    </ion-item>
+    <button ion-item (click)="doChangeHandphone()">
+      <ion-icon name="phone-portrait" color="secondary"></ion-icon>
+      手机
+      <span  item-end>{{phonenumber}}</span>
+    </button>
+    <button ion-item >
+      <ion-icon name="mail" color="secondary"></ion-icon>
+      邮箱
+      <span  item-end>{{emailaddress}}</span>
+    </button>
+    <button ion-item (click)="doChangeOrganization()">
+      <ion-icon name="contacts" color="secondary"></ion-icon>
+      组织
+      <span  item-end>{{organizationName}}</span>
+    </button>
+    <button ion-item>
+      <ion-icon name="chatboxes" color="secondary"></ion-icon>
+      状态
+      <span  item-end *ngIf="status == '0'">无组织</span>
+      <span  item-end *ngIf="status == '1'">组织申请中</span>
+      <span  item-end *ngIf="status == '2'">组织审核未通过</span>
+      <span  item-end *ngIf="status == '3'">正常</span>
+    </button>
+    <button ion-item (click)="doChangeSetting()">
+      <ion-icon name="settings" color="secondary"></ion-icon>
+      设置
+    </button>
+  </ion-list>
+
+</ion-content>

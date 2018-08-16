@@ -1,0 +1,72 @@
+<!--
+  Generated template for the MatchingDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      门禁详情
+    </ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="presentPopover($event)">
+          <ion-icon name="more"></ion-icon>
+        </button>
+      </ion-buttons> 
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding center text-center>
+  <img [src]="doubtPicture">  
+  <p>出口门号 ：{{doorNumber}}</p>
+  <p>标签 ID ：{{marketDoubtId}}</p>
+  <p>车 ID ：{{carId}}</p>
+  <p>车牌号 ：{{carNumberPlate}}</p>
+  <p>车架号 : {{vincode}}</p>
+  <p>时间 ：{{createTime}}</p>
+  <p>商铺号 ：{{shopNumber}}</p>
+  <p>合同人 ：{{shopContractorName}}</p>
+  <p>合同人电话 ：{{contactNumber}}</p>
+  <p>处理时间 ：{{handleTime}}</p>
+  <p>处理人 ：{{handlePersonName}}</p>
+
+  <ion-item>
+      <h1 color="danger">类似车辆</h1>
+  </ion-item>
+  
+
+  <ion-list>
+      <ion-refresher (ionRefresh)="doRefresh($event)">
+          <ion-refresher-content
+                  pullingIcon="arrow-dropdown"
+                  pullingText="下拉刷新"
+                  refreshingSpinner="circles"
+                  refreshingText="加载中...">
+          </ion-refresher-content>
+        </ion-refresher>
+      <ion-item (click)="detail(item)" *ngFor = "let item of items">
+          <ion-avatar item-start>
+            <img [src]="'http://114.116.82.170:8200' + item.doubtPicture ||  'assets/imgs/car.jpg'">
+          </ion-avatar>  
+          <p>车牌号 ：{{item.carNumberPlate}}</p>
+          <p>车架号 : {{item.vincode}}</p>
+          <p>车辆等级 : {{item.dangerLevel}}</p>
+          <p>商铺号 ：{{item.shopNumber}}</p>
+          <p>合同人 ：{{item.shopContractorName}}</p>
+          <p>合同人电话 ：{{item.contactNumber}}</p>
+
+      </ion-item>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+          <ion-infinite-scroll-content
+                  loadingSpinner="bubbles"
+                  loadingText="加载更多">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      
+    </ion-list>
+  
+
+</ion-content>
