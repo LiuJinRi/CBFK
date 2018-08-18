@@ -19,9 +19,7 @@ export class MyApp {
   backButtonPressed : boolean = false;
 
   constructor(private platform: Platform, 
-    statusBar: StatusBar, 
     splashScreen: SplashScreen,
-    storage: Storage,
     public appCtrl: App,  
     public toastProvider: ToastProvider,
     userProvider: UserProvider) {
@@ -30,6 +28,8 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
         var lastTimeBackPress = 0;
         var timePeriodToExit  = 2000;
+
+        splashScreen.hide();
 
         platform.registerBackButtonAction(() => {
           let activeNav: NavController = this.appCtrl.getActiveNavs()[0];

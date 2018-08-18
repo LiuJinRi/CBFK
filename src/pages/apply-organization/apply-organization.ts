@@ -45,6 +45,11 @@ export class ApplyOrganizationPage {
       return;
     } 
 
+    if (this.organizationName == "该组织不存在") {
+      this.toastProvider.show('未找到该组织', 'error')
+      return;
+    } 
+
     this.storage.get('oragnizationTmp').then((data) => { 
       //console.log(data);
       if (data) {

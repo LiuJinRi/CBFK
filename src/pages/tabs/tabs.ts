@@ -17,21 +17,25 @@ export class TabsPage {
   tab4Root = MinePage;
   organizationName : string;
   isEnable : boolean;
+  status : string;
 
   constructor(
     private storage : Storage
   ) {
-    storage.get('organizationName').then((data) => { 
-      if (data) {
-        this.organizationName = data;
-        //console.log(this.organizationName);
-      }
+    storage.get('status').then((data) => { 
+      console.log(data);
+      //if (data) {
+        this.status = data;
+        console.log(this.status);
+      //}
 
-      if ( this.organizationName == null ) {
+
+      if ( this.status != "3" ) {
         this.isEnable = false;
       } else {
         this.isEnable = true;
       }
+
     });
   }
 

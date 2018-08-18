@@ -64,7 +64,7 @@ export class LevelmenuPage {
   level() {
     this.viewCtrl.dismiss();
     let confirm = this.alertCtrl.create({
-      title: '提示',
+      title: '设备等级',
       inputs: [
         {
           name: 'level',
