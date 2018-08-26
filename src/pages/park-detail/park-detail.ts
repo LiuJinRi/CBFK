@@ -36,6 +36,7 @@ export class ParkDetailPage {
   doorNumber : string = null;
   car : any = {};
   sysUserId : string = null;
+  organizationId : string = null;
 
   constructor(public navCtrl: NavController,
     public carProvider : CarProvider,
@@ -64,6 +65,13 @@ export class ParkDetailPage {
           this.sysUserId = data;
         }
       });
+
+      storage.get('organizationId').then((data) => { 
+        console.log(data);
+        if (data) {
+          this.organizationId = data;
+        }
+      });
     }
 
   presentPopover(myEvent) {   
@@ -82,7 +90,7 @@ export class ParkDetailPage {
   }
 
   getCarList(page) {
-    this.carProvider.carParkSimilarList(page, this.perPage, this.carId).then((data) => {
+    this.carProvider.carParkSimilarList(page, this.perPage, this.carId, this.organizationId, this.vincode ).then((data) => {
         console.log(data);
         if (data) {
             if (this.items.length == 0) {

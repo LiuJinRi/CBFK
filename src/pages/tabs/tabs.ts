@@ -29,12 +29,14 @@ export class TabsPage {
         console.log(this.status);
       //}
 
-
+      
       if ( this.status != "3" ) {
         this.isEnable = false;
       } else {
         this.isEnable = true;
       }
+
+      //this.isEnable = true;
 
     });
   }

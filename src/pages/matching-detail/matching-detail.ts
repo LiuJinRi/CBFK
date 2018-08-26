@@ -21,6 +21,7 @@ export class MatchingDetailPage {
   carId : string = null;
   carType : string = null;
   sysUserId : string = null;
+  organizationId : string = null;
 
   constructor(public navCtrl: NavController,
     public popoverCtrl: PopoverController,
@@ -35,6 +36,13 @@ export class MatchingDetailPage {
         console.log(data);
         if (data) {
           this.sysUserId = data;
+        }
+      });
+
+      storage.get('organizationId').then((data) => { 
+        console.log(data);
+        if (data) {
+          this.organizationId = data;
         }
       });
   }
@@ -58,7 +66,7 @@ export class MatchingDetailPage {
   }
 
   getCarDetail() {
-    this.carProvider.detailCarMsg(this.carId, this.carType).then((data)=>{
+    this.carProvider.detailCarMsg(this.carId, this.carType, this.organizationId).then((data)=>{
       console.log(data);
       this.car = data;
       this.car.coverPic = "http://114.116.82.170:8200/" + this.car.coverPic;

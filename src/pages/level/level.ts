@@ -25,6 +25,7 @@ export class LevelPage {
   public searchText:string = null;
   public findForm: FormGroup;
   public sysUserId : string = null;
+  organizationId : string = null;
   
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -43,6 +44,13 @@ export class LevelPage {
           this.sysUserId = data;
         }
       });
+
+      storage.get('organizationId').then((data) => { 
+        console.log(data);
+        if (data) {
+          this.organizationId = data;
+        }
+      });
   }
 
   ionViewWillEnter() {
@@ -54,7 +62,7 @@ export class LevelPage {
   }
 
   getCarList(page) {
-    this.carProvider.carLevelList(page, this.perPage).then((data) => {
+    this.carProvider.carLevelList(page, this.perPage, this.organizationId).then((data) => {
         console.log(data);
         if (data) {
           if ( page == 0) {
@@ -96,7 +104,7 @@ export class LevelPage {
   doFind() {
     var val = this.findForm.value['searchtext'];
     if (val && val.trim() != '') { 
-      this.carProvider.findCarMsg(val, 2, this.sysUserId).then((data)=>{
+      this.carProvider.findCarMsg(val, 2, this.sysUserId, this.organizationId).then((data)=>{
         this.items = data.rows;
       }).catch((err)=>{
         return;
@@ -149,7 +157,7 @@ export class LevelPage {
               text: '是',
               cssClass: 'my-alert-danger',
               handler: data => {
-                this.carProvider.carLeveChange(item.carId, data.level).then((data)=>{
+                this.carProvider.carLevelChange(item.carId, data.level).then((data)=>{
                   if (data.msg == "成功") {
                     this.toastProvider.show("设置等级成功",'success');
                   } else {

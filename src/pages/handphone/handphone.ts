@@ -6,6 +6,7 @@ import {UserProvider} from "../../providers/user/user";
 import {Storage} from '@ionic/storage';
 import {ToastProvider} from "../../providers/toast/toast";
 import { ChangehandphonePage } from '../changehandphone/changehandphone';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 /**
  * Generated class for the HandphonePage page.
@@ -32,7 +33,8 @@ export class HandphonePage {
     private userProvider: UserProvider,
     private toastProvider: ToastProvider,
     private formBuilder: FormBuilder,
-    private storage: Storage) {
+    private storage: Storage,
+    private nativePageTransitions : NativePageTransitions) {
       this.handphoneForm = this.formBuilder.group({
         'oldphonenumber': ['', [Validators.required, AccountValidator.isValidPhone]],
         'newphonenumber': ['', [Validators.required, AccountValidator.isValidPhone]],
@@ -106,6 +108,13 @@ export class HandphonePage {
       
       this.userProvider.changePhone(telephoneNumber, verificationCode).then((data) => {
         if (data.msg == "成功") {
+            let options: NativeTransitionOptions = {
+                direction: 'right',
+                duration: 400,
+                slowdownfactor: -1,
+                iosdelay: 50
+               };
+            this.nativePageTransitions.slide(options);
             this.navCtrl.push(ChangehandphonePage, {'phone' : phone});
           } 
       }).catch((err) => {

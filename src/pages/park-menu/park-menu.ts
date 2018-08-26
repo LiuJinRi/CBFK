@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { CarProvider } from '../../providers/car/car';
 import {ToastProvider} from "./../../providers/toast/toast";
+import { Storage } from '../../../node_modules/@ionic/storage';
 
 /**
  * Generated class for the ParkMenuPage page.
@@ -19,17 +20,26 @@ export class ParkMenuPage {
   handleResult: string = null;
   sysUserId: string = null;
   marketDoubtId: string = null;
+  organizationId : string = null;
 
   constructor(public navCtrl: NavController, 
     public viewCtrl:ViewController,
     public navParams: NavParams,
     public carProvider : CarProvider,
+    public storage : Storage,
     public toastProvider : ToastProvider) {
       console.log(this.navParams);
         if (this.navParams.data) {
             this.sysUserId = this.navParams.get('sysUserId');
             this.marketDoubtId = this.navParams.get('marketDoubtId');
         }
+
+        storage.get('organizationId').then((data) => { 
+          console.log(data);
+          if (data) {
+            this.organizationId = data;
+          }
+        });
   }
 
   close() {
@@ -41,7 +51,7 @@ export class ParkMenuPage {
     console.log(handleResult);
     console.log(this.marketDoubtId);
     console.log(this.sysUserId);
-    this.carProvider.carParkPass(handleResult, this.marketDoubtId, this.sysUserId).then((data)=>{
+    this.carProvider.carParkPass(handleResult, this.marketDoubtId, this.sysUserId, this.organizationId).then((data)=>{
       console.log(data)
       if (data['msg'] == "成功") {
         this.toastProvider.show("处理成功",'success');

@@ -4,6 +4,7 @@ import { CarProvider } from '../../providers/car/car';
 import { MatchingPage } from '../matching/matching';
 import {ToastProvider} from "./../../providers/toast/toast";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Storage } from '../../../node_modules/@ionic/storage';
 
 /**
  * Generated class for the MacthingmenuPage page.
@@ -23,6 +24,7 @@ export class MacthingmenuPage {
   carId: string = null;
   vincode: string = null;
   deviceBoxId: string = null;
+  organizationId : string = null;
 
   constructor(public navCtrl: NavController, 
     public viewCtrl:ViewController,
@@ -30,7 +32,8 @@ export class MacthingmenuPage {
     public carProvider : CarProvider,
     public toastProvider : ToastProvider,
     public alertCtrl : AlertController,
-    private barcodeScanner: BarcodeScanner) {
+    private barcodeScanner: BarcodeScanner,
+    private storage : Storage) {
       console.log(this.navParams);
         if (this.navParams.data) {
             this.boxCode = this.navParams.get('boxCode');
@@ -39,6 +42,13 @@ export class MacthingmenuPage {
             this.vincode = this.navParams.get('vincode');
             this.deviceBoxId = this.navParams.get('deviceBoxId');
         }
+
+        storage.get('organizationId').then((data) => { 
+          console.log(data);
+          if (data) {
+            this.organizationId = data;
+          }
+        });
   }
 
   close() {
@@ -60,7 +70,7 @@ export class MacthingmenuPage {
               text: '是',
               cssClass: 'my-alert-danger',
               handler: () => {
-                this.carProvider.carUnBind(this.vincode, this.deviceBoxId, this.sysUserId).then((data)=>{
+                this.carProvider.carUnBind(this.vincode, this.deviceBoxId, this.sysUserId, this.organizationId).then((data)=>{
                   if (data['msg'] == "成功") {
                     this.toastProvider.show("车辆解绑成功",'success');
                     this.viewCtrl.dismiss();
@@ -82,7 +92,7 @@ scan() {
   this.barcodeScanner.scan().then(barcodeData => {
     console.log('Barcode data', barcodeData);
     this.boxCode = barcodeData.text;
-    this.carProvider.carBindScan(this.boxCode, this.vincode, this.sysUserId).then((data)=>{
+    this.carProvider.carBindScan(this.boxCode, this.vincode, this.sysUserId, this.organizationId).then((data)=>{
       console.log(data)
       if (data['msg']== "成功") {
         this.toastProvider.show("车辆解绑成功",'success');

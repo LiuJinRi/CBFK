@@ -5,6 +5,7 @@ import {UserProvider} from "../../providers/user/user";
 import {Storage} from '@ionic/storage';
 import {ToastProvider} from "../../providers/toast/toast";
 import { SettingPage } from '../setting/setting';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 /**
  * Generated class for the ChangepasswordPage page.
@@ -32,7 +33,8 @@ export class ChangepasswordPage {
     private userProvider: UserProvider,
     private toastProvider: ToastProvider,
     private formBuilder: FormBuilder,
-    private storage: Storage) {
+    private storage: Storage,
+    private nativePageTransitions : NativePageTransitions) {
       this.cahngePasswordForm = this.formBuilder.group({
         'newpassword': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(16)]],
         'newpassword1': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(16)]]
@@ -101,6 +103,14 @@ export class ChangepasswordPage {
       if (data['msg'] == "成功") {
         this.toastProvider.show("变更密码成功",'success');
         this.storage.set('password', this.newpassword);
+        
+        let options: NativeTransitionOptions = {
+          direction: 'right',
+          duration: 400,
+          slowdownfactor: -1,
+          iosdelay: 50
+        };
+        this.nativePageTransitions.slide(options);
         this.navCtrl.push(SettingPage);
       } else {
         this.toastProvider.show(data['msg'], 'errors');

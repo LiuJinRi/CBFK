@@ -36,6 +36,7 @@ export class LevelLocatePage {
     this.map = new BMap.Map("container"); // 创建地图实例     
     
     this.carProvider.carLocate(this.deviceBoxId).then((data)=>{
+      console.log(data);
       console.log(JSON.stringify(data.msg[0]));
       var longitude = data.msg[0].longitude;
       var latitude = data.msg[0].latitude;

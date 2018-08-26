@@ -5,6 +5,7 @@ import {Storage} from '@ionic/storage';
 import {ToastProvider} from "../../providers/toast/toast";
 import { MinePage } from '../mine/mine';
 import { ApplyOrganizationPage } from '../apply-organization/apply-organization';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 /**
  * Generated class for the OrganizationPage page.
@@ -27,7 +28,8 @@ export class OrganizationPage {
     private userProvider: UserProvider,
     private toastProvider: ToastProvider,
     private storage: Storage,
-    private alertCtrl : AlertController) {
+    private alertCtrl : AlertController,
+    private nativePageTransitions : NativePageTransitions) {
       storage.get('sysUserId').then((data) => { 
         if (data) {
           this.sysUserId = data;
@@ -48,6 +50,14 @@ export class OrganizationPage {
 
   applyOrganization() {
     if( this.organizationName == null ) {
+      let options: NativeTransitionOptions = {
+        direction: 'right',
+        duration: 400,
+        slowdownfactor: -1,
+        iosdelay: 50
+       };
+   
+      this.nativePageTransitions.slide(options);
       this.navCtrl.push(ApplyOrganizationPage);
     }
     
@@ -75,6 +85,16 @@ export class OrganizationPage {
                     if (data['msg'] == "成功") {
                       this.toastProvider.show("组织退出成功",'success');
                       this.storage.set('organizationName', "");
+                      
+                      let options: NativeTransitionOptions = {
+                        direction: 'left',
+                        duration: 400,
+                        slowdownfactor: -1,
+                        iosdelay: 50
+                       };
+                   
+                      this.nativePageTransitions.slide(options);
+
                       this.navCtrl.push(MinePage);
                     } else {
                       this.toastProvider.show(data['msg'],'errors');

@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '../../../node_modules/@ionic/storage';
 import { ToastProvider } from '../../providers/toast/toast';
 import {UserProvider} from "./../../providers/user/user";
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 /**
  * Generated class for the ApplyOrganizationPage page.
@@ -27,7 +28,8 @@ export class ApplyOrganizationPage {
     public navParams: NavParams,
     public userProvider : UserProvider,
     public storage : Storage,   
-    public toastProvider : ToastProvider) {
+    public toastProvider : ToastProvider,
+    private nativePageTransitions : NativePageTransitions) {
       storage.get('sysUserId').then((data) => { 
         //console.log(data);
         if (data) {
@@ -63,6 +65,16 @@ export class ApplyOrganizationPage {
         //this.storage.set('organizationName', this.organizationName);
         this.storage.set('status', 1);
         this.toastProvider.show("已申请加入" + this.organizationName + "组织。请等待申请结果！",'success');
+
+        let options: NativeTransitionOptions = {
+          direction: 'left',
+          duration: 400,
+          slowdownfactor: -1,
+          iosdelay: 50
+         };
+     
+        this.nativePageTransitions.slide(options);
+
         this.navCtrl.push(MinePage);
       } else {
         this.toastProvider.show(data['msg'], 'errors');

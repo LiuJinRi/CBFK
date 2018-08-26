@@ -5,6 +5,7 @@ import { Storage } from '../../../node_modules/@ionic/storage';
 import { HandphonePage } from '../handphone/handphone';
 import { OrganizationPage } from '../organization/organization';
 import { SettingPage } from '../setting/setting';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 /**
  * Generated class for the MinePage page.
@@ -27,7 +28,8 @@ export class MinePage {
   phonenumber : any;
   status : any;
   constructor(public navCtrl: NavController,
-    public storage : Storage) {
+    public storage : Storage,
+    private nativePageTransitions : NativePageTransitions) {
 
   }
 
@@ -99,14 +101,38 @@ export class MinePage {
   }
 
   doChangeHandphone() {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+     };
+ 
+    this.nativePageTransitions.slide(options);
     this.navCtrl.push(HandphonePage);
   }
 
   doChangeOrganization() {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+     };
+ 
+    this.nativePageTransitions.slide(options);
     this.navCtrl.push(OrganizationPage);
   }
 
   doChangeSetting() {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+     };
+ 
+    this.nativePageTransitions.slide(options);
     this.navCtrl.push(SettingPage);
   }
   

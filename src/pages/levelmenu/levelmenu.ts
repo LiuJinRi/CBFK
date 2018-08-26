@@ -5,6 +5,7 @@ import { CarProvider } from '../../providers/car/car';
 import {ToastProvider} from "./../../providers/toast/toast";
 import { LevelInformationPage } from '../level-information/level-information';
 import { LevelLocatePage } from '../level-locate/level-locate';
+import { LevelPage } from '../level/level';
 
 /**
  * Generated class for the LevelmenuPage page.
@@ -29,7 +30,7 @@ export class LevelmenuPage {
     public carProvider : CarProvider,
     public toastProvider : ToastProvider,
     public alertCtrl : AlertController) {
-      console.log(this.navParams);
+      //console.log(this.navParams);
         if (this.navParams.data) {
             this.carId = this.navParams.get('carId');
             this.dangerLevel = this.navParams.get('dangerLevel');
@@ -49,10 +50,11 @@ export class LevelmenuPage {
       console.log(data)
       if (data.msg == "成功") {
         this.toastProvider.show("车辆再激活成功",'success');
-        //this.navCtrl.push(LevelPage);
+        this.navCtrl.push(LevelPage);
         this.viewCtrl.dismiss();
       } else {
         this.toastProvider.show("车辆再激活失败",'errors');
+        this.navCtrl.push(LevelPage);
         this.viewCtrl.dismiss();
       }
     }).catch((err)=>{
@@ -82,10 +84,10 @@ export class LevelmenuPage {
               text: '是',
               cssClass: 'my-alert-danger',
               handler: data => {
-                this.carProvider.carLeveChange(this.carId, data.level).then((data)=>{
+                this.carProvider.carLevelChange(this.carId, data.level).then((data)=>{
                   if (data.msg == "成功") {
                     this.toastProvider.show("设置等级成功",'success');
-                    //this.navCtrl.push(LevelPage);
+                    this.navCtrl.push(LevelPage);
                     this.viewCtrl.dismiss();
                   } else {
                     this.toastProvider.show("设置等级失败",'errors');

@@ -6,6 +6,7 @@ import { ResetPasswordPage } from '../reset-password/reset-password';
 import {UserProvider} from "./../../providers/user/user";
 import {ToastProvider} from "./../../providers/toast/toast";
 import {Storage} from '@ionic/storage';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 
 /**
@@ -31,7 +32,8 @@ export class LoginPage {
     public navParams: NavParams,
     public toastProvider: ToastProvider,
     private userProvider: UserProvider,
-    private storage: Storage) {
+    private storage: Storage,
+    private nativePageTransitions : NativePageTransitions) {
       
       storage.get('isRemember').then((data) => { 
         
@@ -53,6 +55,18 @@ export class LoginPage {
           }
         }
       });
+
+  }
+
+  fadeInit() {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+     };
+ 
+    this.nativePageTransitions.slide(options);
   }
 
   ionViewDidLoad() {
@@ -78,6 +92,7 @@ export class LoginPage {
           var email = response.rows[0]['email'];
           var organizationName = response.rows[0]['organizationName'] ;
           var status = response.rows[0]['status'];
+          var organizationId = response.rows[0]['organizationId'];
           var user_password = this.password;
 
           this.storage.set('sysUserId', sysUserId);
@@ -86,6 +101,7 @@ export class LoginPage {
           this.storage.set('phonenumber', phonenumber);
           this.storage.set('email', email);
           this.storage.set('organizationName', organizationName);
+          this.storage.set('organizationId', organizationId);
           this.storage.set('status', status);
 
 
@@ -107,6 +123,15 @@ export class LoginPage {
             //console.log('organization!!');
             this.toastProvider.show("请您先登录组织名",'success');
           }
+
+          let options: NativeTransitionOptions = {
+            direction: 'right',
+            duration: 400,
+            slowdownfactor: -1,
+            iosdelay: 50
+           };
+       
+          this.nativePageTransitions.slide(options);
           this.navCtrl.push(TabsPage);
         }      
 
@@ -121,10 +146,26 @@ export class LoginPage {
   }
 
   register() {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+     };
+ 
+    this.nativePageTransitions.slide(options);
     this.navCtrl.push(RegisterPage);
     }
   
   resetpassword() {
+    let options: NativeTransitionOptions = {
+      direction: 'right',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+     };
+ 
+    this.nativePageTransitions.slide(options);
     this.navCtrl.push(ResetPasswordPage);
   }
 

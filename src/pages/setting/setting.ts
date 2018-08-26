@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { ChangepasswordPage } from '../changepassword/changepassword';
 import {Storage} from '@ionic/storage';
 import { LoginPage } from '../login/login';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 /**
  * Generated class for the SettingPage page.
@@ -23,13 +24,21 @@ export class SettingPage {
     public navParams: NavParams,
     public storage : Storage,
     public app: App,
-    public platform : Platform) {
+    public platform : Platform,
+    private nativePageTransitions : NativePageTransitions) {
   }
 
   ionViewDidLoad() {
   }
 
   doChangePassword() {
+    let options: NativeTransitionOptions = {
+      direction: 'left',
+      duration: 400,
+      slowdownfactor: -1,
+      iosdelay: 50
+     };
+    this.nativePageTransitions.slide(options);
     this.navCtrl.push(ChangepasswordPage);
   }
 

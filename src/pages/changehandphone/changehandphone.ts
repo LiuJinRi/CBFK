@@ -7,6 +7,7 @@ import {Storage} from '@ionic/storage';
 import {ToastProvider} from "../../providers/toast/toast";
 import { MinePage } from '../mine/mine';
 import { HandphonePage } from '../handphone/handphone';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 /**
  * Generated class for the ChangehandphonePage page.
  *
@@ -34,7 +35,8 @@ export class ChangehandphonePage {
     private userProvider: UserProvider,
     private toastProvider: ToastProvider,
     private formBuilder: FormBuilder,
-    private storage: Storage) {
+    private storage: Storage,
+    private nativePageTransitions : NativePageTransitions) {
       this.phone = this.navParams.get('phone');
       this.cahngeHandphoneForm = this.formBuilder.group({
         'newphonenumber': ['', [Validators.required, AccountValidator.isValidPhone]],
@@ -98,9 +100,27 @@ export class ChangehandphonePage {
         if (data.msg == "成功") {
           this.toastProvider.show("变更手机号成功",'success');
           this.storage.set('phonenumber', this.phone);
+
+          let options: NativeTransitionOptions = {
+            direction: 'left',
+            duration: 400,
+            slowdownfactor: -1,
+            iosdelay: 50
+           };
+       
+          this.nativePageTransitions.slide(options);
           this.navCtrl.push(MinePage);
         } else {
           this.toastProvider.show("变更手机号失败", 'errors');
+
+          let options: NativeTransitionOptions = {
+            direction: 'right',
+            duration: 400,
+            slowdownfactor: -1,
+            iosdelay: 50
+           };
+       
+          this.nativePageTransitions.slide(options);
           this.navCtrl.push(HandphonePage);
         } 
       }).catch((err) => {

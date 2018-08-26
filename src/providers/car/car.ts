@@ -20,12 +20,13 @@ export class CarProvider {
 
     }
 
-    findCarMsg(vincode, type, sysUserId) {
+    findCarMsg(vincode, type, sysUserId, organizationId) {
 
         let param = {
             vincode: vincode,
             type: type,
-            sysUserId : sysUserId
+            sysUserId : sysUserId,
+            organizationId : organizationId
         };
         let body = JSON.stringify(param);
         return this.httpProvider.httpPostNoAuth("/common/car/findCarMsg", body);
@@ -37,16 +38,17 @@ export class CarProvider {
         */
     }
 
-    detailCarMsg(carId, carType) {
+    detailCarMsg(carId, carType, organizationId) {
         let param = {
             carId: carId,
-            carType: carType
+            carType: carType,
+            organizationId : organizationId
         };
         let body = JSON.stringify(param);
         return this.httpProvider.httpPostNoAuth("/common/car/carMsg", body);
     }
 
-    carBindList(page, per_page) {
+    carBindList(page, per_page, organizationId) {
         /*
         let param = {
             total: page,
@@ -59,34 +61,37 @@ export class CarProvider {
         let params: URLSearchParams = new URLSearchParams();
         params.set('total', page);
         params.set('count', per_page);
+        params.set('organizationId', organizationId);
         return this.httpProvider.httpGetWithAuth("/binding/binding/carMsgList", params);
         
     }
 
-    carUnBind(vincode, deviceBoxId, sysUserId) {
+    carUnBind(vincode, deviceBoxId, sysUserId, organizationId) {
         console.log(vincode);
         console.log(deviceBoxId);
         console.log(sysUserId);
         let param = {
             vincode: vincode,
             deviceBoxId: deviceBoxId,
-            sysUserId : sysUserId
+            sysUserId : sysUserId,
+            organizationId : organizationId
         };
         let body = JSON.stringify(param);
         return this.httpProvider.httpPostNoAuth("/binding/binding/untie", body);
     }
 
-    carBindScan(boxCode, vincode, sysUserId) {
+    carBindScan(boxCode, vincode, sysUserId, organizationId) {
         let param = {
             boxCode: boxCode,
             vincode: vincode,
-            sysUserId : sysUserId
+            sysUserId : sysUserId,
+            organizationId : organizationId
         };
         let body = JSON.stringify(param);
         return this.httpProvider.httpPostNoAuth("/binding/binding/scan", body);
     }
 
-    carLevelList(page, per_page) {
+    carLevelList(page, per_page, organizationId) {
         /*
         let param = {
             total: page,
@@ -95,9 +100,10 @@ export class CarProvider {
         let body = JSON.stringify(param);
         return this.httpProvider.httpPostWithAuth("/cargrade/cargrade/carMsgList", body);
         */
-       let params: URLSearchParams = new URLSearchParams();
+        let params: URLSearchParams = new URLSearchParams();
         params.set('total', page);
         params.set('count', per_page);
+        params.set('organizationId', organizationId);
         return this.httpProvider.httpGetWithAuth("/cargrade/cargrade/carMsgList", params);
     }
 
@@ -109,7 +115,7 @@ export class CarProvider {
         return this.httpProvider.httpPostNoAuth("/cargrade/cargrade/secondActivation", body);
     }
 
-    carLeveChange(carId, dangerLevel) {
+    carLevelChange(carId, dangerLevel) {
         console.log(carId);
         console.log(dangerLevel);
         let param = {
@@ -121,6 +127,7 @@ export class CarProvider {
     }
 
     carLocate(deviceBoxId) {
+        console.log(deviceBoxId);
         let param = {
             deviceBoxId: deviceBoxId
         };
@@ -136,24 +143,26 @@ export class CarProvider {
         return this.httpProvider.httpPostNoAuth("/cargrade/cargrade/historicalTrack", body);
     }
 
-    carParkList(page, per_page) {
-        
+    carParkList(page, per_page, organizationId) {
+        /*
         let param = {
             total: page,
-            count: per_page
+            count: per_page,
+            organizationId : organizationId
         };
         let body = JSON.stringify(param);
         return this.httpProvider.httpPostWithAuth("/doormonitor/doormonitor/carMsgList", body);
-        
-       /*
+        */
+
         let params: URLSearchParams = new URLSearchParams();
         params.set('total', page);
         params.set('count', per_page);
+        params.set('organizationId', organizationId);
         return this.httpProvider.httpGetWithAuth("/doormonitor/doormonitor/carMsgList", params);
-        */
+
     }
 
-    carParkSimilarList(page, per_page, carId) {
+    carParkSimilarList(page, per_page, carId, organizationId, vincode) {
         /*
         let param = {
             total: page,
@@ -167,16 +176,19 @@ export class CarProvider {
         params.set('total', page);
         params.set('count', per_page);
         params.set('carId', carId);
+        params.set('organizationId', organizationId);
+        params.set('vincode', vincode);
         return this.httpProvider.httpGetNoAuth("/doormonitor/doormonitor/carMsgList", params);
 
     }
 
-    carParkPass(handleResult, marketDoubtId, sysUserId) {
+    carParkPass(handleResult, marketDoubtId, sysUserId, organizationId) {
         
         let param = {
             handleResult: handleResult,
             marketDoubtId: marketDoubtId,
             sysUserId: sysUserId,
+            organizationId : organizationId
         };
         let body = JSON.stringify(param);
         return this.httpProvider.httpPostWithAuth("/doormonitor/doormonitor/ifLetGo", body);

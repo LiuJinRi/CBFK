@@ -28,6 +28,7 @@ export class MatchingPage {
   public findForm: FormGroup;
   sysUserId : string = null;
   boxCode : string = null;
+  organizationId : string = null;
 
   constructor(
     public navCtrl: NavController,
@@ -42,12 +43,19 @@ export class MatchingPage {
       'searchtext': ['', [Validators.required]]
     });
 
-  storage.get('sysUserId').then((data) => { 
-    console.log(data);
-    if (data) {
-      this.sysUserId = data;
-    }
-  });
+    storage.get('sysUserId').then((data) => { 
+      console.log(data);
+      if (data) {
+        this.sysUserId = data;
+      }
+    });
+
+    storage.get('organizationId').then((data) => { 
+      console.log(data);
+      if (data) {
+        this.organizationId = data;
+      }
+    });
   }
 
   ionViewWillEnter() {
@@ -59,7 +67,7 @@ export class MatchingPage {
   }
 
   getCarList(page) {
-    this.carProvider.carBindList(page, this.perPage).then((data) => {
+    this.carProvider.carBindList(page, this.perPage, this.organizationId).then((data) => {
       console.log(data);
         if (data) {
           if ( page == 0) {
@@ -101,9 +109,9 @@ export class MatchingPage {
     var val = this.findForm.value['searchtext'];
     console.log(val);
     if (val && val.trim() != '') { 
-      this.carProvider.findCarMsg(val, 1, this.sysUserId).then((data)=>{
+      this.carProvider.findCarMsg(val, 1, this.sysUserId, this.organizationId).then((data)=>{
         console.log(data);
-        this.items = data.rows;
+        this.items = data.rows;   
       }).catch((err)=>{
         return;
       });
@@ -114,10 +122,10 @@ export class MatchingPage {
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('Barcode data', barcodeData);
       this.boxCode = barcodeData.text;
-      this.carProvider.carBindScan(this.boxCode, item.vincode, item.sysUserId).then((data)=>{
+      this.carProvider.carBindScan(this.boxCode, item.vincode, item.sysUserId, this.organizationId).then((data)=>{
         console.log(data)
         if (data['msg']== "成功") {
-          this.toastProvider.show("车辆解绑成功",'success');
+          this.toastProvider.show("车辆绑定成功",'success');
           this.navCtrl.push(MatchingPage);
         } else {
           this.toastProvider.show(data['msg'],'errors');
@@ -152,7 +160,7 @@ export class MatchingPage {
               text: '是',
               cssClass: 'my-alert-danger',
               handler: () => {
-                this.carProvider.carUnBind(vincode, deviceBoxId, this.sysUserId).then((data)=>{
+                this.carProvider.carUnBind(vincode, deviceBoxId, this.sysUserId, this.organizationId).then((data)=>{
                   console.log(data);
                   if (data['msg'] == "成功") {
                     this.toastProvider.show("车辆解绑成功",'success');

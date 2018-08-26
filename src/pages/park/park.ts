@@ -23,6 +23,7 @@ export class ParkPage {
   public searchText:string = null;
   public findForm: FormGroup;
   public sysUserId : string = null;
+  organizationId : string = null;
 
   constructor(public navCtrl: NavController,
     public carProvider : CarProvider,
@@ -39,6 +40,13 @@ export class ParkPage {
           this.sysUserId = data;
         }
       });
+
+      storage.get('organizationId').then((data) => { 
+        console.log(data);
+        if (data) {
+          this.organizationId = data;
+        }
+      });
   }
 
   ionViewWillEnter() {
@@ -50,7 +58,7 @@ export class ParkPage {
   }
 
   getCarList(page) {
-    this.carProvider.carParkList(page, this.perPage).then((data) => {
+    this.carProvider.carParkList(page, this.perPage, this.organizationId).then((data) => {
         console.log(data.rows);
         if (data) {
             if ( page == 0) {
@@ -93,7 +101,7 @@ export class ParkPage {
     var val = this.findForm.value['searchtext'];
     console.log(val);
     if (val && val.trim() != '') { 
-      this.carProvider.findCarMsg(val, 3, this.sysUserId).then((data)=>{
+      this.carProvider.findCarMsg(val, 3, this.sysUserId, this.organizationId).then((data)=>{
         console.log(data);
         this.items = data.rows;
       }).catch((err)=>{
