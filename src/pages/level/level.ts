@@ -64,9 +64,10 @@ export class LevelPage {
   getCarList(page) {
     this.carProvider.carLevelList(page, this.perPage, this.organizationId).then((data) => {
         console.log(data);
+        var items_tmp = [];
         if (data) {
           if ( page == 0) {
-            this.items.splice(0, this.items.length); 
+            this.items = items_tmp; 
           }
 
           if (this.items.length == 0) {

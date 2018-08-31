@@ -55,7 +55,7 @@ export class ParkDetailPage {
       this.handleTime = this.navParams.get('handleTime');
       this.handleResult = this.navParams.get('handleResult');
       this.handlePersonName = this.navParams.get('handlePersonName');
-      this.doubtPicture = "http://114.116.82.170:8200" + this.navParams.get('doubtPicture');
+      this.doubtPicture = "http://114.116.82.170/" + this.navParams.get('doubtPicture');
       this.cardNumber = this.navParams.get('cardNumber');
       this.doorNumber = this.navParams.get('doorNumber');
 

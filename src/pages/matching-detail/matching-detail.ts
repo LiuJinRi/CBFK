@@ -69,7 +69,7 @@ export class MatchingDetailPage {
     this.carProvider.detailCarMsg(this.carId, this.carType, this.organizationId).then((data)=>{
       console.log(data);
       this.car = data;
-      this.car.coverPic = "http://114.116.82.170:8200/" + this.car.coverPic;
+      this.car.coverPic = "http://114.116.82.170/" + this.car.coverPic;
     }).catch((err)=>{
       return;
     });

@@ -79,7 +79,7 @@ export class LoginPage {
       this.toastProvider.show("请输入密码", 'success');
     } else {
       this.userProvider.login(this.loginName, this.password).then((response) => {
-        //console.log(response.rows[0]);
+        console.log(response.rows[0]);
         if ( response['msg'] != "成功") {
           this.toastProvider.show(response['msg'], 'error');
         }
@@ -103,7 +103,6 @@ export class LoginPage {
           this.storage.set('organizationName', organizationName);
           this.storage.set('organizationId', organizationId);
           this.storage.set('status', status);
-
 
           //this.storage.set('isRemember', this.isRemember);
           

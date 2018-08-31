@@ -56,7 +56,7 @@ export class MacthingmenuPage {
   }
 
   unmatching() {
-    this.viewCtrl.dismiss();
+    //this.viewCtrl.dismiss();
     let confirm = this.alertCtrl.create({
       title: '提示',
       message: '确定要解绑？',
@@ -73,6 +73,7 @@ export class MacthingmenuPage {
                 this.carProvider.carUnBind(this.vincode, this.deviceBoxId, this.sysUserId, this.organizationId).then((data)=>{
                   if (data['msg'] == "成功") {
                     this.toastProvider.show("车辆解绑成功",'success');
+                    this.navCtrl.push(MatchingPage);
                     this.viewCtrl.dismiss();
                   } else {
                     this.toastProvider.show(data['msg'],'errors');
@@ -95,8 +96,9 @@ scan() {
     this.carProvider.carBindScan(this.boxCode, this.vincode, this.sysUserId, this.organizationId).then((data)=>{
       console.log(data)
       if (data['msg']== "成功") {
-        this.toastProvider.show("车辆解绑成功",'success');
+        this.toastProvider.show("车辆绑定成功",'success');
         this.navCtrl.push(MatchingPage);
+        this.viewCtrl.dismiss();
       } else {
         this.toastProvider.show(data['msg'],'errors');
         return;
@@ -107,7 +109,7 @@ scan() {
    }).catch(err => {
        console.log('Error', err);
    });
-   this.viewCtrl.dismiss();
+   //this.viewCtrl.dismiss();
   }
 
   ionViewDidLoad() {

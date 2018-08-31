@@ -1,5 +1,5 @@
-import { CarProvider } from './../../providers/car/car';
 import { Component } from '@angular/core';
+import { CarProvider } from './../../providers/car/car';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**

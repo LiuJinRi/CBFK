@@ -36,7 +36,7 @@
   <ion-list>
     <ion-item (click)="detail(item)" *ngFor = "let item of items">
         <ion-avatar item-start>
-          <img [src]="'http://114.116.82.170:8200/' + item.doubtPicture ||  'assets/imgs/car.jpg'">
+          <img [src]="'http://114.116.82.170/' + item.doubtPicture ||  'assets/imgs/car.jpg'">
         </ion-avatar>  
         <p>出口门号 ：{{item.doorNumber}}</p>
         <p>标签 ID ：{{item.marketDoubtId}}</p>

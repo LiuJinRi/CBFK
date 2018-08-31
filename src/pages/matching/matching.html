@@ -37,7 +37,7 @@
       <ion-item-sliding *ngFor = "let item of items">
           <ion-item (click)="detail(item)">
               <ion-avatar item-start>
-                  <img [src]="'http://114.116.82.170:8200/' + item.coverPic ||  'assets/imgs/car.jpg'">
+                  <img [src]="'http://114.116.82.170/' + item.coverPic ||  'assets/imgs/car.jpg'">
               </ion-avatar>  
               <p>车 ID ：{{item.carId}}</p>
               <p *ngIf="item.carType == 1">车种类 ：金融车</p>
@@ -50,8 +50,8 @@
           </ion-item>
 
           <ion-item-options side="right">
-              <button ion-button color="caidan" (click)="unmatching(item)">解绑</button>
-              <button ion-button color="caidan" (click)="scan(item)" *ngIf="item.bindPersonName != null">扫描魔盒</button>
+              <button ion-button color="caidan" (click)="unmatching(item)" *ngIf="item.bindPersonName != null">解绑</button>
+              <button ion-button color="caidan" (click)="scan(item)" *ngIf="item.bindPersonName == null">扫描魔盒</button>
           </ion-item-options> 
           
         </ion-item-sliding>

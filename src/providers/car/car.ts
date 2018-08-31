@@ -59,10 +59,12 @@ export class CarProvider {
         */
         
         let params: URLSearchParams = new URLSearchParams();
+        console.log(page);
+        console.log(organizationId);
         params.set('total', page);
         params.set('count', per_page);
         params.set('organizationId', organizationId);
-        return this.httpProvider.httpGetWithAuth("/binding/binding/carMsgList", params);
+        return this.httpProvider.httpGetNoAuth("/binding/binding/carMsgList", params);
         
     }
 
@@ -104,7 +106,7 @@ export class CarProvider {
         params.set('total', page);
         params.set('count', per_page);
         params.set('organizationId', organizationId);
-        return this.httpProvider.httpGetWithAuth("/cargrade/cargrade/carMsgList", params);
+        return this.httpProvider.httpGetNoAuth("/cargrade/cargrade/carMsgList", params);
     }
 
     carReactivate(deviceBoxId) {
@@ -158,7 +160,7 @@ export class CarProvider {
         params.set('total', page);
         params.set('count', per_page);
         params.set('organizationId', organizationId);
-        return this.httpProvider.httpGetWithAuth("/doormonitor/doormonitor/carMsgList", params);
+        return this.httpProvider.httpGetNoAuth("/doormonitor/doormonitor/carMsgList", params);
 
     }
 
@@ -178,7 +180,7 @@ export class CarProvider {
         params.set('carId', carId);
         params.set('organizationId', organizationId);
         params.set('vincode', vincode);
-        return this.httpProvider.httpGetNoAuth("/doormonitor/doormonitor/carMsgList", params);
+        return this.httpProvider.httpGetNoAuth("/common/car/carMsgList", params);
 
     }
 
@@ -191,7 +193,7 @@ export class CarProvider {
             organizationId : organizationId
         };
         let body = JSON.stringify(param);
-        return this.httpProvider.httpPostWithAuth("/doormonitor/doormonitor/ifLetGo", body);
+        return this.httpProvider.httpPostNoAuth("/doormonitor/doormonitor/ifLetGo", body);
         /*
         let params: URLSearchParams = new URLSearchParams();
         params.set('handleResult', handleResult);

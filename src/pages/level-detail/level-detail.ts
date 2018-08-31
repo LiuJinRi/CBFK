@@ -74,7 +74,7 @@ export class LevelDetailPage {
       console.log(data);
       this.car = ''; 
       this.car = data;
-      this.car.coverPic = "http://114.116.82.170:8200" + this.car.coverPic;
+      this.car.coverPic = "http://114.116.82.170/" + this.car.coverPic;
     }).catch((err)=>{
       return;
     });

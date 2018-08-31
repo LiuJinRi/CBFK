@@ -67,11 +67,13 @@ export class MatchingPage {
   }
 
   getCarList(page) {
+    console.log(this.organizationId);
     this.carProvider.carBindList(page, this.perPage, this.organizationId).then((data) => {
       console.log(data);
+        var items_tmp = [];
         if (data) {
           if ( page == 0) {
-            this.items.splice(0,this.items.length); 
+            this.items = items_tmp;
           }
           if (this.items.length == 0) {
               this.items = data.rows;               
@@ -122,7 +124,7 @@ export class MatchingPage {
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('Barcode data', barcodeData);
       this.boxCode = barcodeData.text;
-      this.carProvider.carBindScan(this.boxCode, item.vincode, item.sysUserId, this.organizationId).then((data)=>{
+      this.carProvider.carBindScan(this.boxCode, item.vincode, this.sysUserId, this.organizationId).then((data)=>{
         console.log(data)
         if (data['msg']== "成功") {
           this.toastProvider.show("车辆绑定成功",'success');
