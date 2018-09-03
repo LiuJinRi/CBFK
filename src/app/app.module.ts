@@ -84,7 +84,9 @@ import { Geolocation } from '@ionic-native/geolocation';
       driverOrder: ['sqlite', 'websql', 'indexdb', 'localstorage']
     }),
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      tabsHideOnSubPages: false,
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -124,7 +126,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     CarProvider,
     StorageService,
     Geolocation,
-    BarcodeScanner
+    BarcodeScanner,
+    
   ]
 })
 export class AppModule {}

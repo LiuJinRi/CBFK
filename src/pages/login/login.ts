@@ -94,6 +94,7 @@ export class LoginPage {
           var status = response.rows[0]['status'];
           var organizationId = response.rows[0]['organizationId'];
           var user_password = this.password;
+          var token = response.rows[0]['token'];   //后加的
 
           this.storage.set('sysUserId', sysUserId);
           this.storage.set('headPortrait', headPortrait);
@@ -103,6 +104,9 @@ export class LoginPage {
           this.storage.set('organizationName', organizationName);
           this.storage.set('organizationId', organizationId);
           this.storage.set('status', status);
+          this.storage.set('token', token);//后加的
+
+          console.log(token);
 
           //this.storage.set('isRemember', this.isRemember);
           
@@ -131,6 +135,7 @@ export class LoginPage {
            };
        
           this.nativePageTransitions.slide(options);
+          //this.navCtrl.setRoot(TabsPage, {tabindex : 1});
           this.navCtrl.push(TabsPage);
         }      
 

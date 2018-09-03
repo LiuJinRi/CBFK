@@ -180,7 +180,7 @@ export class CarProvider {
         params.set('carId', carId);
         params.set('organizationId', organizationId);
         params.set('vincode', vincode);
-        return this.httpProvider.httpGetNoAuth("/common/car/carMsgList", params);
+        return this.httpProvider.httpGetNoAuth("/common/car/doorMonitorMsg", params);
 
     }
 

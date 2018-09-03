@@ -51,12 +51,15 @@ export class HttpProvider {
     }
 
     public httpGetNoAuth(url: string, params: URLSearchParams) {
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8' );
-        let options = new RequestOptions({headers: headers, search: params});
-        return this.http.get(this.API_URL + url, options).toPromise()
-            .then(this.extractData)
-            .catch(err => this.handleError(err));
+        return this.storage.get("token").then(data => {
+            var headers = new Headers();
+            headers.append("token",data);
+            let options = new RequestOptions({ headers: headers, search: params });
+            return this.http.get(this.API_URL + url, options).toPromise()
+                .then(this.extractData)
+                .catch(err => this.handleError(err));
+
+        });
     }
 
     public httpGetNoAuth2(url: string) {
@@ -66,12 +69,14 @@ export class HttpProvider {
     }
 
     public httpPostNoAuth(url: string, body: any) {
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8' );
-        let options = new RequestOptions({headers: headers});
-        return this.http.post(this.API_URL + url, body).toPromise()
-            .then(this.extractData)
-            .catch(err => this.handleError(err));
+        return this.storage.get("token").then(data => {
+            var headers = new Headers();
+            headers.append("token",data);
+            let options = new RequestOptions({headers: headers});
+            return this.http.post(this.API_URL + url, body, options).toPromise()
+                .then(this.extractData)
+                .catch(err => this.handleError(err));
+        });
     }
 
     public httpPostWithAuth(url: string, body: any) {

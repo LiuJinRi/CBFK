@@ -101,7 +101,7 @@ export class UserProvider {
             verificationCode: verificationCode
         };
         let body = JSON.stringify(param);
-        return this.httpProvider.httpPostWithAuth("/setting/my/changePhoneNumber", body);
+        return this.httpProvider.httpPostNoAuth("/setting/my/changePhoneNumber", body);
     }
 
     changePhoneNext(sysUserId, newTelephonenumber, verificationCode) {
@@ -111,7 +111,7 @@ export class UserProvider {
             verificationCode: verificationCode
         };
         let body = JSON.stringify(param);
-        return this.httpProvider.httpPostWithAuth("/setting/my/nextStep", body);
+        return this.httpProvider.httpPostNoAuth("/setting/my/nextStep", body);
     }
 
     changeSettingPassword (sysUserId, password, newPassword) {

@@ -1,11 +1,12 @@
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController,App } from 'ionic-angular';
 import { CarProvider } from '../../providers/car/car';
 import {ToastProvider} from "./../../providers/toast/toast";
 import { LevelInformationPage } from '../level-information/level-information';
 import { LevelLocatePage } from '../level-locate/level-locate';
 import { LevelPage } from '../level/level';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the LevelmenuPage page.
@@ -28,6 +29,7 @@ export class LevelmenuPage {
     public viewCtrl:ViewController,
     public navParams: NavParams,
     public carProvider : CarProvider,
+    public app: App,
     public toastProvider : ToastProvider,
     public alertCtrl : AlertController) {
       //console.log(this.navParams);
@@ -39,7 +41,7 @@ export class LevelmenuPage {
   }
 
   close() {
-    this.viewCtrl.dismiss();
+    //this.viewCtrl.dismiss();
   }
 
   reactivate() {
@@ -64,7 +66,6 @@ export class LevelmenuPage {
   }
 
   level() {
-    //this.viewCtrl.dismiss();
     let confirm = this.alertCtrl.create({
       title: '设备等级',
       inputs: [

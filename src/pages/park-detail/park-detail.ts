@@ -92,6 +92,7 @@ export class ParkDetailPage {
   getCarList(page) {
     this.carProvider.carParkSimilarList(page, this.perPage, this.carId, this.organizationId, this.vincode ).then((data) => {
         console.log(data);
+        
         if (data) {
             if (this.items.length == 0) {
                 this.items = data.rows;
@@ -99,6 +100,7 @@ export class ParkDetailPage {
                 this.items = this.items.concat(data.rows);
             }
         }
+        
     });
   }
 

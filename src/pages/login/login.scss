@@ -12,6 +12,16 @@ page-login {
 
     .content-md {
         background-color: #ededed;
+        
+    }
+
+    .login_bk {
+        background-image: url("/assets/imgs/login_bk.png");
+    }
+
+    .content {
+        background-image: url("/assets/imgs/bk.png");
+        background-size: cover;
     }
 
     .register-title {

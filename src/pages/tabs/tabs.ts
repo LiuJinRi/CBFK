@@ -1,9 +1,10 @@
-import { Component} from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { MatchingPage } from '../matching/matching';
 import { LevelPage } from '../level/level';
 import { ParkPage } from '../park/park';
 import { MinePage } from '../mine/mine';
 import {Storage} from '@ionic/storage';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -18,15 +19,20 @@ export class TabsPage {
   organizationName : string;
   isEnable : boolean;
   status : string;
+  tabindex : number;
 
   constructor(
-    private storage : Storage
+    private storage : Storage,
+    public navParams: NavParams,
+    public navCtrl: NavController,
   ) {
+    
+
     storage.get('status').then((data) => { 
-      console.log(data);
+      //console.log(data);
       //if (data) {
         this.status = data;
-        console.log(this.status);
+        //console.log(this.status);
       //}
 
       
@@ -37,13 +43,10 @@ export class TabsPage {
       }
 
       //this.isEnable = true;
-
     });
+
+    if (this.navParams.data) {
+      this.tabindex = this.navParams.get('tabindex');
+    }
   }
-
-  ionViewDidEnter() {
-    
-  }
-
-
 }
