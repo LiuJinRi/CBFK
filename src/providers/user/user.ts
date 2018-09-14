@@ -48,7 +48,7 @@ export class UserProvider {
         let params: URLSearchParams = new URLSearchParams();
         params.set('loginName', loginName);
         params.set('newPassword', newPassword);
-        params.set('phonenumber', phonenumber);
+        params.set('phoneNumber', phonenumber);
         params.set('verificationCode', verificationCode);
         return this.httpProvider.httpPostNoAuth("/sys/login/findPassword", params);
     }
@@ -90,7 +90,7 @@ export class UserProvider {
         */
         
         let params: URLSearchParams = new URLSearchParams();
-        params.set('phonenumber', phonenumber);
+        params.set('phoneNumber', phonenumber);
         return this.httpProvider.httpGetNoAuth("/sys/login/getCode", params);
         
     }
@@ -107,7 +107,7 @@ export class UserProvider {
     changePhoneNext(sysUserId, newTelephonenumber, verificationCode) {
         let param = {
             sysUserId : sysUserId,
-            newTelephonenumber: newTelephonenumber,
+            newTelephoneNumber: newTelephonenumber,
             verificationCode: verificationCode
         };
         let body = JSON.stringify(param);
@@ -121,7 +121,7 @@ export class UserProvider {
             newPassword: newPassword
         };
         let body = JSON.stringify(param);
-        return this.httpProvider.httpPostNoAuth("/setting/my/changePhoneNumber", body);
+        return this.httpProvider.httpPostNoAuth("/setting/my/changePassword", body);
     }
 
     findOrganization(organizationCode) {

@@ -17,20 +17,20 @@
 
 
 <ion-content no-padding>
-  <ion-list center>
-    <button ion-item (click)="doChangePassword()">
-      <ion-icon name="lock" color="secondary"></ion-icon>
+  <ion-list>
+    <img [src]="'assets/imgs/setting.png'" style="width : 100%;height : auto"> 
+    <button ion-item (click)="doChangePassword()" class="item1">
+      <ion-icon name="lock" color="grey"></ion-icon>
       更改密码
     </button>
-    <button ion-item (click)="logout()">
-      <ion-icon name="mail" color="secondary"></ion-icon>
+    <button ion-item (click)="logout()" >
+      <ion-icon name="mail" color="grey"></ion-icon>
       退出登录
     </button>
-    <button ion-item (click)="doExitSystem()">
-      <ion-icon name="contacts" color="secondary"></ion-icon>
+    <button ion-item (click)="doExitSystem()" class="item1">
+      <ion-icon name="contacts" color="grey"></ion-icon>
       退出系统
     </button>
-   <button ion-item></button>
   </ion-list>
 
 </ion-content>

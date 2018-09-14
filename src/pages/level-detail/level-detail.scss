@@ -7,9 +7,68 @@ page-level-detail {
         text-align: center;
         color: white;      
       }
-    .back-button-md {
+      .back-button-md {
         margin : 0
     }
 
-    
+    .title1 {
+        background: url('assets/imgs/title1.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .item11.item-md{
+        background-color: #488aff;
+    }
+
+    .item12.item-md{
+        background-color: #488aff;
+        padding-bottom: 10px;
+    }
+
+    .item14.item-md{
+        padding-bottom: 0px;
+        padding-top: 5px;
+    }
+
+    .item13.item-md{
+        background-color: transparent;
+    }
+
+    .item11.item-md p{
+        margin-top:1%;
+        color: black;
+        z-index: 10;
+        position: absolute;
+        margin-left: 20%;
+        text-align : center;
+        
+    }
+
+    .item12.item-md p{
+        color: white;
+        background-color: #4eb3ff;
+        padding : 5px;
+        margin-bottom: 1px;
+        font-size: 1.3rem;
+    }
+
+    .item14.item-md p{
+        color: black;
+        font-size: 1.3rem;
+    }
+
+    .item15.item-md p{
+        color: black;
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+    }
+
+    .label-md {
+        margin: 13px 8px 1px;
+    }
+
+    .col {
+        padding : 1px;
+    }
 }

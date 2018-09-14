@@ -7,24 +7,16 @@
 <ion-header>
 
   <ion-navbar>
-    <!--ion-title>绑定</ion-title-->
-    <ion-title>
-        <form [formGroup]="findForm" (ngSubmit)="doFind()">
-          <ion-item color="primary" no-lines>
-            <ion-label color="light" style="font-size: 2rem">门禁</ion-label>
-            <ion-input placeholder="请输入车架号" formControlName="searchtext" style="color: black; background-color: white;border-radius: 20px"></ion-input>
-            <button ion-button color="light" clear item-right type="submit">
-              <ion-icon style="font-size: 2em" name="search"></ion-icon>
-            </button>
-          </ion-item>
-        </form>         
-    </ion-title>
+    <ion-row>
+      <ion-title style="width : 10%" center text-center>门禁</ion-title>
+      <ion-searchbar  (ionInput)="filterItems($event)" placeholder="请输入车架号" style=" width : 80%;border-radius: 20px" ></ion-searchbar>
+    </ion-row>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content nopadding> 
+<ion-content> 
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
             pullingIcon="arrow-dropdown"
@@ -35,20 +27,61 @@
   </ion-refresher>
   <ion-list>
     <ion-item (click)="detail(item)" *ngFor = "let item of items">
-        <ion-avatar item-start>
-          <img [src]="'http://114.116.82.170/' + item.doubtPicture ||  'assets/imgs/car.jpg'">
-        </ion-avatar>  
-        <p>出口门号 ：{{item.doorNumber}}</p>
-        <p>标签 ID ：{{item.marketDoubtId}}</p>
-        <p>车 ID ：{{item.carId}}</p>
-        <p>车牌号 ：{{item.carNumberPlate}}</p>
-        <p>车架号 : {{item.vincode}}</p>
-        <p>时间 ：{{item.createTime}}</p>
-        <p>商铺号 ：{{item.shopNumber}}</p>
-        <p>合同人 ：{{item.shopContractorName}}</p>
-        <p>合同人电话 ：{{item.contactNumber}}</p>
-        <p>处理时间 ：{{item.handleTime}}</p>
-        <p>处理人 ：{{item.handlePersonName}}</p>
+      <ion-row>
+          <ion-col align-self-center col-4>
+            <img [src]="pic_url + item.coverPic ||  'assets/imgs/car.jpg'" style="width : 100px;height : 100px"> 
+          </ion-col>
+          <ion-col col-8>
+            <p><B>车牌号 ：{{item.carNumberPlate}}</B></p>
+            <ion-row>
+              <ion-col align-self-center color="light">
+                <p><B>出口门号 ：{{item.doorNumber}}</B></p>
+              </ion-col>
+              <ion-col align-self-center>
+                <p><B>标签 ID ：{{item.marketDoubtId}}</B></p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col align-self-center color="light">
+                <p><B>车架号 : {{item.vincode}}</B></p>
+              </ion-col>
+              <ion-col align-self-center>
+                <p><B>车 ID ：{{item.carId}}</B></p>
+              </ion-col>
+            </ion-row>
+            
+            <ion-row>
+              <ion-col align-self-center color="light">
+                <p><B>商铺号 ：{{item.shopNumber}}</B></p>
+              </ion-col>
+              <ion-col align-self-center>
+                <p><B>时间 ：{{item.createTime}}</B></p>
+              </ion-col>
+            </ion-row>
+            
+            
+            <img [src]="'assets/imgs/line.png'" style="width : 100%;height : auto">
+            
+            <ion-row>
+              <ion-col align-self-center color="light">
+                <p><B>合同人 ：{{item.shopContractorName}}</B></p>
+              </ion-col>
+              <ion-col align-self-center>
+                <p><B>合同人电话 ：{{item.contactNumber}}</B></p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col align-self-center color="light">
+                <p><B>处理人 ：{{item.handlePersonName}}</B></p>
+              </ion-col>
+              <ion-col align-self-center>
+                <p><B>处理时间 ：{{item.handleTime}}</B></p>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
 
     </ion-item>
     

@@ -29,16 +29,34 @@ export class LevelInformationPage {
   }
 
   getNewsList() {
+    var items_tmp = [];
+    this.items = items_tmp;
     this.carProvider.carInformation(this.deviceBoxId).then((data) => {
       console.log(data);
-        if (data) {
-            if (this.items.length == 0) {
-                this.items = data.rows;
-            } else {
-                this.items = this.items.concat(data.rows);
-            }
-        }
+      if (data) {
+          if (this.items.length == 0) {
+              this.items = data.rows;
+          } else {
+              this.items = this.items.concat(data.rows);
+          }
+      }
     });
+  }
+
+  filterItems(ev: any) {
+    
+    let val = ev.target.value;
+    
+    if (val && val.trim() != '') { 
+      this.items = this.items.filter( function(item) {
+        console.log(item.msgs.toLowerCase());
+        return item.msgs.toLowerCase().includes(val.toLowerCase());
+      });
+    } else {
+      var items_tmp = [];
+      this.items = items_tmp;
+      this.getNewsList();
+    }
   }
 
 }

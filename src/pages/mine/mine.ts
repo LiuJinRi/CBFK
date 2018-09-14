@@ -1,3 +1,4 @@
+import { HttpProvider } from './../../providers/http/http';
 
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -6,6 +7,7 @@ import { HandphonePage } from '../handphone/handphone';
 import { OrganizationPage } from '../organization/organization';
 import { SettingPage } from '../setting/setting';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the MinePage page.
@@ -29,7 +31,8 @@ export class MinePage {
   status : any;
   constructor(public navCtrl: NavController,
     public storage : Storage,
-    private nativePageTransitions : NativePageTransitions) {
+    private nativePageTransitions : NativePageTransitions,
+    private httpProvider : HttpProvider) {
 
   }
 
@@ -45,7 +48,7 @@ export class MinePage {
     this.storage.get('headPortrait').then((data) => { 
       //console.log(data);
       if (data) {
-        this.headPortrait = "http://114.116.82.170:8200" + data;
+        this.headPortrait = this.httpProvider.API_URL + data;
       }
     });
 
@@ -84,20 +87,6 @@ export class MinePage {
       }
     });
     
-    /*
-    this.storage.get('user').then((data) => {
-        console.log(data);
-        if (data) {
-          this.headPortrait =  "http://114.116.82.170:8200/" + data[0].headPortrait;
-          this.userName = data[0].userName;
-          this.emailaddress = data[0].email;
-          this.organizationName = data[0].organizationName;
-          this.status = data[0].status;
-          this.sysUserId = data[0].sysUserId;
-          this.phonenumber = data[0].phonenumber;
-        }
-    });
-    */
   }
 
   doChangeHandphone() {

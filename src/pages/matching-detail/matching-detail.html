@@ -19,26 +19,91 @@
 
 </ion-header>
 
-<ion-content padding center text-center>
-    <img [src]="car.coverPic">  
-    <p>车牌号 ：{{car.carNumberPlate}}</p>
-    <p>车架号 : {{car.vincode}}</p>
-    <p>车辆颜色 ：{{car.color}}</p>
-    <p>品牌 ：{{car.brand}}</p>
-    <p *ngIf="car.status == 1">绑定情况 ：已绑定</p>
-    <p *ngIf="car.status == 2">绑定情况 ：解绑</p>
-    <p>绑定日期 ：{{car.bindTime || '还没有绑定'}}</p>
-    <p>绑定人 ：{{car.bindPersonName}}</p>
-    <p>磨合编号 ：{{car.boxCode}}</p>
-    <p *ngIf="car.isEnter == 1">在场情况 ：在场</p>
-    <p *ngIf="car.isEnter == 2">在场情况 ：不在场</p>
-    <p *ngIf="car.isInStock == 1">在库情况 ：在库</p>
-    <p *ngIf="car.isInStock == 2">在库情况 ：不在库</p>
-    <p>设备码 ：{{car.boxCode}}</p>
-    <p>车辆等级 ：{{car.dangerLevel}}</p>
-    <p>贷款金额 ：{{car.loanAmount}}</p>
-    <p>还款时间 ：{{car.repaymentTime}}</p>
-    <p>商铺号 ：{{car.shopNumber}}</p>
-    <p>合同人 ：{{car.shopContractorName}}</p>
-    <p>合同人电话 ：{{car.contactNumber}}</p>
+<ion-content center text-center>
+    <img [src]="car.coverPic" style="width:100%;height : auto">
+    <ion-item  class="item11" no-lines>
+      <ion-row>
+        <ion-col align-self-center>
+          <p align-self-center>{{car.brand}}</p>
+          <img [src]="'assets/imgs/title1.png'" style="width : 45%;height : auto" > 
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item  class="item12" no-lines>
+      <ion-row>
+        <ion-col align-self-center color="light">
+          <p>车牌号 :{{car.carNumberPlate}}</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>车辆等级 :{{car.dangerLevel}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col align-self-center>
+          <p>车架号 : {{car.vincode}}</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>车辆颜色 : {{car.color}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item  class="item13" no-lines>
+      <ion-row>
+        <ion-col align-self-center>
+          <img [src]="'assets/imgs/detail.png'" style="width : 20%;height : auto" >
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    
+    <ion-item  class="item14" no-lines align-self-center text-center>
+      
+      <ion-row>
+        <ion-col align-self-center color="light">
+          <p>贷款金额</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>还款时间</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>商铺号</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col align-self-center>
+          <p>{{car.loanAmount || '无'}}</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>{{car.repaymentTime || '无'}}</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>{{car.shopNumber || '无'}}</p>
+        </ion-col>
+      </ion-row>
+           
+    </ion-item> 
+
+    <ion-item  class="item15" no-lines align-self-center> 
+      <img [src]="'assets/imgs/line.png'" style="width : 150%;height : auto"> 
+      <ion-row>
+        <p>设备编码 ：{{car.boxCode}}</p>
+      </ion-row>
+      <ion-row>
+        <ion-col align-self-center>
+          <p>绑定人 ：{{car.bindPersonName}}</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>绑定日期 ：{{car.bindTime}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col align-self-center>
+          <p>合同人 ：{{car.shopContractorName}}</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>合同人电话 ：{{car.contactNumber}}</p>
+        </ion-col>
+      </ion-row>     
+    </ion-item>   
+    
 </ion-content>

@@ -1,3 +1,4 @@
+import { HttpProvider } from './../../providers/http/http';
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { MatchingDetailPage } from '../matching-detail/matching-detail';
@@ -6,6 +7,7 @@ import { Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { Storage } from '../../../node_modules/@ionic/storage';
 import { ToastProvider } from '../../providers/toast/toast';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the MatchingPage page.
@@ -29,6 +31,7 @@ export class MatchingPage {
   sysUserId : string = null;
   boxCode : string = null;
   organizationId : string = null;
+  pic_url : string = null;
 
   constructor(
     public navCtrl: NavController,
@@ -37,12 +40,9 @@ export class MatchingPage {
     public storage : Storage,
     public toastProvider : ToastProvider,
     public alertCtrl : AlertController,   
-    private barcodeScanner: BarcodeScanner
+    private barcodeScanner: BarcodeScanner,
+    private httpProvider : HttpProvider
   ) {
-    this.findForm = this.formBuilder.group({
-      'searchtext': ['', [Validators.required]]
-    });
-
     storage.get('sysUserId').then((data) => { 
       console.log(data);
       if (data) {
@@ -56,13 +56,11 @@ export class MatchingPage {
         this.organizationId = data;
       }
     });
+
+    this.pic_url = httpProvider.PIC_URL;
   }
 
   ionViewWillEnter() {
-    this.findForm = this.formBuilder.group({
-      'searchtext': ['', [Validators.required]]
-    });
-
     this.getCarList(0);
   }
 
@@ -128,10 +126,10 @@ export class MatchingPage {
         console.log(data)
         if (data['msg']== "成功") {
           this.toastProvider.show("车辆绑定成功",'success');
-          this.navCtrl.push(MatchingPage);
+          this.navCtrl.push(TabsPage, {tabindex:"0"});
         } else {
           this.toastProvider.show(data['msg'],'errors');
-          return;
+          this.navCtrl.push(TabsPage, {tabindex:"0"});
         }
       }).catch((err)=>{
         return;
@@ -166,10 +164,10 @@ export class MatchingPage {
                   console.log(data);
                   if (data['msg'] == "成功") {
                     this.toastProvider.show("车辆解绑成功",'success');
-                    this.navCtrl.push(MatchingPage);
+                    this.navCtrl.push(TabsPage, {tabindex:"0"});
                   } else {
                     this.toastProvider.show(data['msg'],'errors');
-                    return;
+                    this.navCtrl.push(TabsPage, {tabindex:"0"});
                   }
                   this.items.clear();
                   this.getCarList(0);
@@ -188,6 +186,22 @@ export class MatchingPage {
     var carId = item.carId;
     var carType = item.carType;
     this.navCtrl.push(MatchingDetailPage, { 'carId' : carId, 'carType' : carType });
+  }
+
+  filterItems(ev: any) {
+    var items_tmp = [];
+    let val = ev.target.value;
+    this.items = items_tmp;
+    if (val && val.trim() != '') { 
+      this.carProvider.findCarMsg(val, 1, this.sysUserId, this.organizationId).then((data)=>{
+        console.log(data);
+        this.items = data.rows;   
+      }).catch((err)=>{
+        return;
+      });
+    } else {
+      this.getCarList(0);
+    }
   }
 
 }

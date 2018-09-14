@@ -1,3 +1,4 @@
+import { HttpProvider } from './../../providers/http/http';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { LevelDetailPage } from '../level-detail/level-detail';
@@ -7,6 +8,7 @@ import { CarProvider } from '../../providers/car/car';
 import { Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { Storage } from '../../../node_modules/@ionic/storage';
 import { ToastProvider } from '../../providers/toast/toast';
+import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the LevelPage page.
  *
@@ -26,6 +28,7 @@ export class LevelPage {
   public findForm: FormGroup;
   public sysUserId : string = null;
   organizationId : string = null;
+  pic_url : string = null;
   
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -33,11 +36,13 @@ export class LevelPage {
     private formBuilder: FormBuilder,
     public storage : Storage,
     public toastProvider : ToastProvider,
-    public alertCtrl : AlertController) {
+    public alertCtrl : AlertController,
+    private httpProvider : HttpProvider) {
+      /*
       this.findForm = this.formBuilder.group({
         'searchtext': ['', [Validators.required]]
       });
-
+      */  
       storage.get('sysUserId').then((data) => { 
         console.log(data);
         if (data) {
@@ -51,12 +56,16 @@ export class LevelPage {
           this.organizationId = data;
         }
       });
+
+      this.pic_url = this.httpProvider.PIC_URL;
   }
 
   ionViewWillEnter() {
+    /*
     this.findForm = this.formBuilder.group({
       'searchtext': ['', [Validators.required]]
     });
+    */
 
     this.getCarList(0);
   }
@@ -101,7 +110,7 @@ export class LevelPage {
         infiniteScroll.complete();
     }, 2000);
   }
-
+  /*
   doFind() {
     var val = this.findForm.value['searchtext'];
     if (val && val.trim() != '') { 
@@ -110,6 +119,22 @@ export class LevelPage {
       }).catch((err)=>{
         return;
       });
+    }
+  }
+  */
+  filterItems(ev: any) {
+    var items_tmp = [];
+    let val = ev.target.value;
+    this.items = items_tmp;
+    if (val && val.trim() != '') { 
+      this.carProvider.findCarMsg(val, 2, this.sysUserId, this.organizationId).then((data)=>{
+        console.log(data);
+        this.items = data.rows;   
+      }).catch((err)=>{
+        return;
+      });
+    } else {
+      this.getCarList(0);
     }
   }
 
@@ -125,9 +150,9 @@ export class LevelPage {
       console.log(data)
       if (data.msg == "成功") {
         this.toastProvider.show("车辆再激活成功",'success');
-        this.navCtrl.push(LevelPage);
-        this.items.clear();
-        this.getCarList(0);
+        this.navCtrl.push(TabsPage, {tabindex:"1"});
+        //this.items.clear();
+        //this.getCarList(0);
       } else {
         this.toastProvider.show("车辆再激活失败",'errors');
         return;
@@ -161,9 +186,10 @@ export class LevelPage {
                 this.carProvider.carLevelChange(item.carId, data.level).then((data)=>{
                   if (data.msg == "成功") {
                     this.toastProvider.show("设置等级成功",'success');
+                    this.navCtrl.push(TabsPage, {tabindex:"1"});
                   } else {
                     this.toastProvider.show("设置等级失败",'errors');
-                    return;
+                    this.navCtrl.push(TabsPage, {tabindex:"1"});
                   }
                   this.items.clear();
                   this.getCarList(0);

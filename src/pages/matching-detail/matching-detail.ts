@@ -1,3 +1,4 @@
+import { HttpProvider } from './../../providers/http/http';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, PopoverController, NavParams, ViewController } from 'ionic-angular';
 import { MacthingmenuPage } from '../macthingmenu/macthingmenu';
@@ -28,7 +29,8 @@ export class MatchingDetailPage {
     public navParams: NavParams,
     public carProvider : CarProvider,
     public viewController : ViewController,
-    private storage: Storage) { 
+    private storage: Storage,
+    private httpProvider : HttpProvider) { 
       this.carId  = this.navParams.get('carId');
       this.carType = this.navParams.get('carType');
 
@@ -69,7 +71,7 @@ export class MatchingDetailPage {
     this.carProvider.detailCarMsg(this.carId, this.carType, this.organizationId).then((data)=>{
       console.log(data);
       this.car = data;
-      this.car.coverPic = "http://114.116.82.170/" + this.car.coverPic;
+      this.car.coverPic = this.httpProvider.PIC_URL + this.car.coverPic;
     }).catch((err)=>{
       return;
     });

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { CarProvider } from '../../providers/car/car';
 import {ToastProvider} from "./../../providers/toast/toast";
 import { Storage } from '../../../node_modules/@ionic/storage';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the ParkMenuPage page.
@@ -55,10 +56,11 @@ export class ParkMenuPage {
       console.log(data)
       if (data['msg'] == "成功") {
         this.toastProvider.show("处理成功",'success');
-        //this.navCtrl.push(ParkPage);
+        this.navCtrl.push(TabsPage, {tabindex:"2"});
         this.viewCtrl.dismiss();
       } else {
         this.toastProvider.show(data['msg'],'errors');
+        this.navCtrl.push(TabsPage, {tabindex:"2"});
         this.viewCtrl.dismiss();
       }
     }).catch((err)=>{

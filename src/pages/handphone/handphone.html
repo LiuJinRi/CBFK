@@ -18,39 +18,27 @@
   </ion-header>
   
   
-  <ion-content padding >
+  <ion-content>
       <form [formGroup]="handphoneForm" (ngSubmit)="doResetPhone()">
-          <div style="text-align: center; margin: 20px;">
-              <ion-item style="background-color: white;border-radius: 20px;" no-lines>
-                  <ion-label>
-                      <ion-icon name="ios-phone-portrait" color="secondary"></ion-icon>
-                  </ion-label>
-                  <ion-input type="number" formControlName="oldphonenumber" placeholder="请输入旧手机号" clearInput></ion-input>
-              </ion-item>
-          </div>
-          <div style="text-align: center; margin: 20px;">
-              <ion-item style="background-color: white;border-radius: 20px;" no-lines>
-                  <ion-label>
-                      <ion-icon name="ios-color-filter" color="secondary"></ion-icon>
-                  </ion-label>
-                  <ion-input type="text" placeholder="验证码" clearInput formControlName="verificationCode"></ion-input>
-  
-                  <button ion-button clear item-right (click)="sendCode($event)" #sendBtn [disabled]="isTimerStart">
-                      {{timerText}}
-                  </button>
-              </ion-item>
-          </div>
-          <div style="text-align: center; margin: 20px;">
-              <ion-item style="background-color: white;border-radius: 20px;" no-lines>
-                  <ion-label>
-                      <ion-icon name="ios-phone-portrait" color="secondary"></ion-icon>
-                  </ion-label>
-                  <ion-input type="number" formControlName="newphonenumber" placeholder="请输入新手机号" clearInput></ion-input>
-              </ion-item>
-          </div>
+            <img src="assets/imgs/changephone1.png" style="width : 100%;height : auto">
+            <ion-item no-lines class="item1">
+                <ion-label>
+                    <ion-icon name="ios-phone-portrait" color="grey"></ion-icon>旧手机号
+                </ion-label>
+                <ion-input type="number" formControlName="oldphonenumber" clearInput></ion-input>
+            </ion-item>
+            <ion-item no-lines class="item2">
+                <ion-label>
+                    <ion-icon name="ios-send" color="grey"></ion-icon>验证码
+                </ion-label>
+                <ion-input type="text" clearInput formControlName="verificationCode"></ion-input>
 
+                <button class="code" ion-button clear item-right (click)="sendCode($event)" #sendBtn [disabled]="isTimerStart">
+                    {{timerText}}
+                </button>
+            </ion-item>
           <ion-row  center text-center>
-              <button ion-button block color="lightText" type="submit" style="margin-left: 30px;margin-right: 30px;margin-top:20px;margin-bottom:20px;border-radius: 20px">
+              <button ion-button block color="lightText" type="submit" src="assets/imgs/button_bk.png" style="margin: 30px;">
                   下一步
               </button>
           </ion-row>

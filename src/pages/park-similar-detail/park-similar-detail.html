@@ -19,18 +19,90 @@
   
   </ion-header>
   
-  <ion-content padding center text-center>
-    <img [src]="doubtPicture">  
-    <p>出口门号 ：{{doorNumber}}</p>
-    <p>标签 ID ：{{marketDoubtId}}</p>
-    <p>车 ID ：{{carId}}</p>
-    <p>车牌号 ：{{carNumberPlate}}</p>
-    <p>车架号 : {{vincode}}</p>
-    <p>时间 ：{{createTime}}</p>
-    <p>商铺号 ：{{shopNumber}}</p>
-    <p>合同人 ：{{shopContractorName}}</p>
-    <p>合同人电话 ：{{contactNumber}}</p>
-    <p>处理时间 ：{{handleTime}}</p>
-    <p>处理人 ：{{handlePersonName}}</p>
+  <ion-content center text-center>
+    <img [src]="pic_url + coverPic" style="width:100%;height : auto">
+    <ion-item  class="item11" no-lines>
+    <ion-row>
+      <ion-col align-self-center>
+        <p align-self-center>{{carNumberPlate}}</p>
+        <img [src]="'assets/imgs/title2.png'" style="width : 45%;height : auto" > 
+      </ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-item  class="item12" no-lines>
+    <ion-row>
+      <ion-col align-self-center color="light">
+        <p>出口门号 ：{{doorNumber}}</p>
+      </ion-col>
+      <ion-col align-self-center>
+        <p>标签 ID ：{{marketDoubtId}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col align-self-center>
+        <p>车 ID ：{{carId}}</p>
+      </ion-col>
+      <ion-col align-self-center>
+        <p>车架号 : {{vincode}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+
+    <ion-item  class="item13" no-lines>
+      <ion-row>
+        <ion-col align-self-center>
+          <img [src]="'assets/imgs/detail.png'" style="width : 20%;height : auto" >
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    
+    <ion-item  class="item14" no-lines align-self-center text-center>
+      
+      <ion-row>
+        <ion-col align-self-center color="light">
+          <p>时间</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>合同人</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>处理时间</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col align-self-center>
+          <p>{{createTime || '无'}}</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>{{shopContractorName || '无'}}</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>{{handleTime || '无'}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col align-self-center color="light">
+          <p>商铺号</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>合同人电话</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>处理人</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col align-self-center>
+          <p>{{shopNumber || '无'}}</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>{{contactNumber || '无'}}</p>
+        </ion-col>
+        <ion-col align-self-center>
+          <p>{{handlePersonName || '无'}}</p>
+        </ion-col>
+      </ion-row>           
+    </ion-item> 
   </ion-content>
   

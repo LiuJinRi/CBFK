@@ -11,60 +11,57 @@
   </ion-navbar>
 </ion-header-->
 
-<ion-content >
-    <div class="login_bk" style="margin_top : 200px">
-        <div style="text-align: center; margin: 20px">
-            <ion-item style="border: none" no-lines>
-                <ion-label>
-                    <ion-icon name="ios-person" color="secondary"></ion-icon>
-                </ion-label>
-                <ion-input type="text" [(ngModel)] ="loginName" placeholder="请输入账号" clearInput [value]="loginName"></ion-input>
-            </ion-item>
-        </div>
-        <div style="text-align: center; margin : 20px;">
-            <ion-item style="background-color: white;border-radius: 20px;" no-lines>
-                <ion-label>
-                    <ion-icon name="md-unlock" color="secondary"></ion-icon>
-                </ion-label>
-                <ion-input [(ngModel)]="password" [value]="password" type="{{isShowPassword?'text':'password'}}" placeholder="请输入密码"></ion-input>
-                <button ion-button clear color="dark" item-right (click)="showPassword($event)" class="show-btn">
-                    <ion-icon name="{{isShowPassword?'eye':'eye-off'}}" color="danger"></ion-icon>
-                </button>
-            </ion-item>
-        </div>
-    </div>
-    
+<ion-content fullscreen="true">
+    <div class="login_bk">
+        <ion-item no-lines>
+            <ion-label>
+                <ion-icon name="person" color="icon"></ion-icon>
+            </ion-label>
+            <ion-input type="text" [(ngModel)] ="loginName" placeholder="请输入账号" clearInput [value]="loginName"></ion-input>
+        </ion-item>
+        <ion-item no-lines>
+            <ion-label>
+                <ion-icon name="md-unlock" color="icon"></ion-icon>
+            </ion-label>
+            <ion-input [(ngModel)]="password" [value]="password" type="{{isShowPassword?'text':'password'}}" placeholder="请输入密码"></ion-input>
+            <button ion-button clear color="icon" item-right (click)="showPassword($event)" class="show-btn">
+                <ion-icon name="{{isShowPassword?'eye':'eye-off'}}" color="icon"></ion-icon>
+            </button>
+        </ion-item>
 
-    <ion-grid center text-center>
+        <ion-grid center text-center>
         <ion-row>
             <ion-col>
-                <ion-item text-left color="bk" no-lines>
+                <ion-item text-left color="icon" no-lines>
                     <a (click)="resetpassword()">忘记密码？</a>
                 </ion-item>               
                 
             </ion-col>
             <ion-col>  
                 <ion-item color="bk" no-lines text-right >
-                    <!--button ion-button clear color="dark" item-left  class="show-btn">
-                        <ion-icon name="{{isRemember?'radio-button-on':'radio-button-off'}}" color="primary"></ion-icon>
-                    </button-->
                     <ion-toggle [(ngModel)]="isRemember"  checked="false"></ion-toggle>
-                    <ion-label color="primary">记住密码</ion-label>                       
+                    <ion-label color="icon">记住密码</ion-label>                       
                 </ion-item>                      
             </ion-col>
             
-        </ion-row>
+            </ion-row>
+        </ion-grid>
+
+        <ion-grid center text-center> 
         <ion-row>
-            <button ion-button block color="lightText" (click)="doLogin()" style="margin-left: 30px;margin-right: 30px;margin-top:20px;margin-bottom:20px;border-radius: 20px">
-                登录
+            <button ion-button block (click)="doLogin()" style="margin: 10%; margin-bottom : 5%;background : transparent" color="icon">
+                登      录
             </button>
         </ion-row>
         <ion-row class="register-title">
-                <ion-col>
-                    <span ion-text>还没有账号？<a (click)="register()">立即注册</a></span>
-                </ion-col>
-            
-            </ion-row>
+            <ion-col>
+                <span ion-text>还没有账号？<a (click)="register()"> 立即注册</a></span>
+            </ion-col>
+        </ion-row>
     </ion-grid>
+    </div>
+    
+
+    
       
 </ion-content>

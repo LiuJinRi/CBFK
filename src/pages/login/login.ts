@@ -79,16 +79,18 @@ export class LoginPage {
       this.toastProvider.show("请输入密码", 'success');
     } else {
       this.userProvider.login(this.loginName, this.password).then((response) => {
-        console.log(response.rows[0]);
+        //console.log(response);
+        //console.log(response.rows[0]);
         if ( response['msg'] != "成功") {
+          console.log(response);
           this.toastProvider.show(response['msg'], 'error');
-        }
+        } 
 
         if ( response.rows.length != 0 ) {
           var sysUserId = response.rows[0]['sysUserId'];
           var headPortrait = response.rows[0]['headPortrait'];
           var userName = response.rows[0]['userName'];
-          var phonenumber = response.rows[0]['phonenumber'];
+          var phonenumber = response.rows[0]['phoneNumber'];
           var email = response.rows[0]['email'];
           var organizationName = response.rows[0]['organizationName'] ;
           var status = response.rows[0]['status'];
@@ -106,7 +108,7 @@ export class LoginPage {
           this.storage.set('status', status);
           this.storage.set('token', token);//后加的
 
-          console.log(token);
+          console.log(status);
 
           //this.storage.set('isRemember', this.isRemember);
           
@@ -135,8 +137,13 @@ export class LoginPage {
            };
        
           this.nativePageTransitions.slide(options);
-          //this.navCtrl.setRoot(TabsPage, {tabindex : 1});
-          this.navCtrl.push(TabsPage);
+
+
+          if ( status == 3 ) {
+            this.navCtrl.push(TabsPage, {tabindex : "0"});
+          } else {          
+            this.navCtrl.push(TabsPage, {tabindex : "3"});
+          }
         }      
 
         }).catch((err) => {

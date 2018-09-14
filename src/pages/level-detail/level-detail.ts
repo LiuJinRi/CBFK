@@ -1,8 +1,10 @@
+import { HttpProvider } from './../../providers/http/http';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController,ActionSheetController } from 'ionic-angular';
 import { LevelmenuPage } from '../levelmenu/levelmenu';
 import { CarProvider } from './../../providers/car/car';
 import {Storage} from '@ionic/storage';
+
 
 /**
  * Generated class for the LevelDetailPage page.
@@ -28,7 +30,7 @@ export class LevelDetailPage {
     public navParams: NavParams,
     public carProvider : CarProvider,
     private storage: Storage,
-    private actionSheetCtrl : ActionSheetController) { 
+    private httpProvider : HttpProvider) { 
       
       this.carId  = this.navParams.get('carId');
       this.carType = this.navParams.get('carType');
@@ -74,7 +76,7 @@ export class LevelDetailPage {
       console.log(data);
       this.car = ''; 
       this.car = data;
-      this.car.coverPic = "http://114.116.82.170/" + this.car.coverPic;
+      this.car.coverPic = this.httpProvider.PIC_URL + this.car.coverPic;
     }).catch((err)=>{
       return;
     });

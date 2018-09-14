@@ -6,6 +6,7 @@ import {ToastProvider} from "../../providers/toast/toast";
 import { MinePage } from '../mine/mine';
 import { ApplyOrganizationPage } from '../apply-organization/apply-organization';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the OrganizationPage page.
@@ -22,6 +23,7 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 export class OrganizationPage {
   organizationName : string = null;
   sysUserId : string = null;
+  status : any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -42,6 +44,13 @@ export class OrganizationPage {
         }
       });
 
+      storage.get('status').then((data) => { 
+        console.log(data);
+        if (data) {
+          this.status = data;
+        }
+      });
+
   }
 
   ionViewDidLoad() {
@@ -49,7 +58,7 @@ export class OrganizationPage {
   }
 
   applyOrganization() {
-    if( this.organizationName == null ) {
+    if( this.status != 3 ) {
       let options: NativeTransitionOptions = {
         direction: 'right',
         duration: 400,
@@ -60,16 +69,15 @@ export class OrganizationPage {
       this.nativePageTransitions.slide(options);
       this.navCtrl.push(ApplyOrganizationPage);
     }
-    
   }
 
   exitOrganization() {
     console.log(this.organizationName);
     console.log(this.sysUserId);
-    if( this.organizationName != null ) {
+    if( this.status == 3 ) {
       let confirm = this.alertCtrl.create({
         title: '提示',
-        message: '确定要退出组织？',
+        message: '确定要退出组织吗？',
         buttons: [
             {
                 text: '否',

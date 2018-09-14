@@ -7,6 +7,7 @@ import {Storage} from '@ionic/storage';
 import {ToastProvider} from "../../providers/toast/toast";
 import { ChangehandphonePage } from '../changehandphone/changehandphone';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the HandphonePage page.
@@ -37,7 +38,6 @@ export class HandphonePage {
     private nativePageTransitions : NativePageTransitions) {
       this.handphoneForm = this.formBuilder.group({
         'oldphonenumber': ['', [Validators.required, AccountValidator.isValidPhone]],
-        'newphonenumber': ['', [Validators.required, AccountValidator.isValidPhone]],
         'verificationCode': ['', [Validators.required]]
     });
   }
@@ -84,28 +84,15 @@ export class HandphonePage {
   }
 
   doResetPhone() {
-
-      if (!this.handphoneForm.valid) {
-        if (this.handphoneForm.value['newphonenumber'] == "") {
-          this.toastProvider.show('请输入正确的新手机号', 'error')
-          return;
-        }
-      }
-
-      if ( this.verify_code != this.handphoneForm.value['verificationCode'] ) {
-        this.toastProvider.show('验证码错误，重新输入一下', 'error')
-        return;
-      }
-
-      if ( this.handphoneForm.value['oldphonenumber'] == this.handphoneForm.value['newphonenumber'] ) {
-        this.toastProvider.show('重新输入别的手机号', 'error')
-        return;
-      }
-
-      var phone = this.handphoneForm.value['newphonenumber'];
-      var telephoneNumber = this.handphoneForm.value['oldphonenumber'];
-      var verificationCode = this.verify_code;
       
+    if ( this.handphoneForm.value['verificationCode'] == "" ) {
+        this.toastProvider.show('请输入验证码', 'error')
+        return;
+    } 
+    
+    var telephoneNumber = this.handphoneForm.value['oldphonenumber'];
+    var verificationCode = this.handphoneForm.value['verificationCode'];
+
       this.userProvider.changePhone(telephoneNumber, verificationCode).then((data) => {
         if (data.msg == "成功") {
             let options: NativeTransitionOptions = {
@@ -115,11 +102,14 @@ export class HandphonePage {
                 iosdelay: 50
                };
             this.nativePageTransitions.slide(options);
-            this.navCtrl.push(ChangehandphonePage, {'phone' : phone});
+            this.navCtrl.push(ChangehandphonePage);
           } 
       }).catch((err) => {
           console.log(err);
       });
+
+
+      //this.navCtrl.push(ChangehandphonePage, {'phone' : '15840135239'});
       
   }
 

@@ -1,3 +1,4 @@
+import { HttpProvider } from './../../providers/http/http';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Storage } from '../../../node_modules/@ionic/storage';
@@ -28,18 +29,20 @@ export class ParkSimilarDetailPage {
   handleTime : string = null;
   handleResult : string = null;
   handlePersonName : string = null;
-  doubtPicture : string = null;
+  coverPic : string = null;
   cardNumber : string = null;
   doorNumber : string = null;
   car : any = {};
   sysUserId : string = null;
+  pic_url : string = null;
 
   constructor(public navCtrl: NavController,
     public carProvider : CarProvider,
     public storage : Storage,
     public navParams : NavParams,
     public toastProvider : ToastProvider,
-    public popoverCtrl : PopoverController) {
+    public popoverCtrl : PopoverController,
+    private httpProvider : HttpProvider) {
       this.marketDoubtId = this.navParams.get('marketDoubtId');
       this.carId = this.navParams.get('carId');
       this.carNumberPlate = this.navParams.get('carNumberPlate');
@@ -51,9 +54,10 @@ export class ParkSimilarDetailPage {
       this.handleTime = this.navParams.get('handleTime');
       this.handleResult = this.navParams.get('handleResult');
       this.handlePersonName = this.navParams.get('handlePersonName');
-      this.doubtPicture = "http://114.116.82.170/" + this.navParams.get('doubtPicture');
+      this.coverPic = this.navParams.get('coverPic');
       this.cardNumber = this.navParams.get('cardNumber');
       this.doorNumber = this.navParams.get('doorNumber');
+      this.pic_url = this.httpProvider.PIC_URL;
     }
 
   ionViewDidLoad() {

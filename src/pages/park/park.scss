@@ -6,4 +6,35 @@ page-park {
     .content-md {
         background-color: #ededed;
     }
+
+    .item-md p {
+        font-size: 1.2rem;
+        margin-bottom : 2px;
+        margin-left : 10px;
+    }
+
+    .col {
+        padding : 0px;
+    }
+
+    .content {
+        background-image: url("/assets/imgs/mine_bk.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .list-md ion-item-options .button {
+        background-image: url("/assets/imgs/shortcut.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .button-inner {
+        font-size: 15px;
+        color : black;
+    }
+
+    .toolbar .searchbar-md {
+        padding: none;
+    }
 }

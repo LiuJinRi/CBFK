@@ -17,7 +17,7 @@ export class TabsPage {
   tab3Root = ParkPage;
   tab4Root = MinePage;
   organizationName : string;
-  isEnable : boolean;
+  isEnable : boolean = true;
   status : string;
   tabindex : number;
 
@@ -34,13 +34,9 @@ export class TabsPage {
         this.status = data;
         //console.log(this.status);
       //}
-
-      
       if ( this.status != "3" ) {
         this.isEnable = false;
-      } else {
-        this.isEnable = true;
-      }
+      } 
 
       //this.isEnable = true;
     });

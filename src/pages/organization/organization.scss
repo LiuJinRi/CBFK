@@ -9,8 +9,81 @@ page-organization {
         background-color: #00ccff;
     }
 
+    .content-md {
+        background-color: #ededed;
+    }
+
     .back-button-md {
         margin : 0
+    }
+
+    .content {
+        background-image: url("/assets/imgs/mine_bk.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    a {
+        color: #ffffff;
+    }
+
+    .label-md-primary, .item-input .label-md-primary, .item-select .label-md-primary, .item-datetime .label-md-primary {
+        color: #ffffff;
+    }
+
+    .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+        border-bottom-color: #ffffff;
+        -webkit-box-shadow: inset 0 -1px 0 0 #ffffff;
+        box-shadow: inset 0 -1px 0 0 #ffffff;
+    }
+
+    .item1.item-md{
+        background-color: #f3f4f9;
+    }
+
+    .item11.item-md{
+        background-color: #488aff;
+    }
+
+    .button-inner {
+        font-size: 15px;
+    }
+
+    .item-md {
+        padding-left: 16px;
+        padding-right: 16px;
+        
+        width: 100%;
+        height: auto;
+    }
+
+    .list-md {
+        background-color: transparent;
+    }
+
+    .code {
+        color : red;
+        font-size: 10px;
+    }
+
+    .item-md p {
+        margin: 0 0 2px;
+        overflow: inherit;
+        font-size: 2rem;
+        line-height: normal;
+        text-overflow: inherit;
+        color: white;
+    }
+
+    .label-md {
+        margin: 13px 8px 13px 8px;
+    }
+
+    
+
+    ion-icon {
+        margin-right: 10px;
+        font-size: 1.2em;
     }
 
 }

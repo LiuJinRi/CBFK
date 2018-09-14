@@ -5,6 +5,7 @@ import { MatchingPage } from '../matching/matching';
 import {ToastProvider} from "./../../providers/toast/toast";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Storage } from '../../../node_modules/@ionic/storage';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the MacthingmenuPage page.
@@ -56,7 +57,7 @@ export class MacthingmenuPage {
   }
 
   unmatching() {
-    //this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss();
     let confirm = this.alertCtrl.create({
       title: '提示',
       message: '确定要解绑？',
@@ -68,16 +69,16 @@ export class MacthingmenuPage {
           },
           {
               text: '是',
-              cssClass: 'my-alert-danger',
               handler: () => {
                 this.carProvider.carUnBind(this.vincode, this.deviceBoxId, this.sysUserId, this.organizationId).then((data)=>{
                   if (data['msg'] == "成功") {
                     this.toastProvider.show("车辆解绑成功",'success');
-                    this.navCtrl.push(MatchingPage);
+                    this.navCtrl.push(TabsPage, {tabindex:"0"});
                     this.viewCtrl.dismiss();
                   } else {
                     this.toastProvider.show(data['msg'],'errors');
-                    return;
+                    this.navCtrl.push(TabsPage, {tabindex:"0"});
+                    this.viewCtrl.dismiss();
                   }
                 }).catch((err)=>{
                   return;
@@ -90,6 +91,7 @@ export class MacthingmenuPage {
   }
 
 scan() {
+  this.viewCtrl.dismiss();
   this.barcodeScanner.scan().then(barcodeData => {
     console.log('Barcode data', barcodeData);
     this.boxCode = barcodeData.text;
@@ -97,11 +99,12 @@ scan() {
       console.log(data)
       if (data['msg']== "成功") {
         this.toastProvider.show("车辆绑定成功",'success');
-        this.navCtrl.push(MatchingPage);
+        this.navCtrl.push(TabsPage, {tabindex:"0"});
         this.viewCtrl.dismiss();
       } else {
         this.toastProvider.show(data['msg'],'errors');
-        return;
+        this.navCtrl.push(TabsPage, {tabindex:"0"});
+        this.viewCtrl.dismiss();
       }
     }).catch((err)=>{
       return;

@@ -16,7 +16,7 @@
   </ion-navbar>
 
 </ion-header>
-
+<!--
 <ion-content padding text-center>
     <ion-item text-center>
       <h1>{{organizationName}}</h1>
@@ -32,4 +32,24 @@
         </ion-col>
       </ion-row>   
     </ion-grid>
+</ion-content>
+-->
+<ion-content>
+  <ion-list>
+    <ion-item center text-center class="item11" no-lines>
+        <img [src]="'assets/imgs/organization.png'" style="width : 40%;height : auto"> 
+        <p>{{organizationName}}</p>
+    </ion-item>
+    <ion-row  center text-center>
+        <button ion-button block color="lightText" (click)="applyOrganization()" style="margin: 30px;margin-bottom : 0px;">
+            加 入
+        </button>
+    </ion-row>
+    <ion-row  center text-center>
+        <button ion-button block color="lightText" (click)="exitOrganization()" style="margin: 30px;;margin-bottom : 0px;">
+            退 出
+        </button>
+    </ion-row>
+  </ion-list>
+
 </ion-content>

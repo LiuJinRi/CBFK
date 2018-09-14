@@ -1,3 +1,4 @@
+import { HttpProvider } from './../../providers/http/http';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Storage } from '../../../node_modules/@ionic/storage';
@@ -37,13 +38,15 @@ export class ParkDetailPage {
   car : any = {};
   sysUserId : string = null;
   organizationId : string = null;
+  pic_url : string = null;
 
   constructor(public navCtrl: NavController,
     public carProvider : CarProvider,
     public storage : Storage,
     public navParams : NavParams,
     public toastProvider : ToastProvider,
-    public popoverCtrl : PopoverController) {
+    public popoverCtrl : PopoverController,
+    private httpProvider : HttpProvider) {
       this.marketDoubtId = this.navParams.get('marketDoubtId');
       this.carId = this.navParams.get('carId');
       this.carNumberPlate = this.navParams.get('carNumberPlate');
@@ -55,23 +58,19 @@ export class ParkDetailPage {
       this.handleTime = this.navParams.get('handleTime');
       this.handleResult = this.navParams.get('handleResult');
       this.handlePersonName = this.navParams.get('handlePersonName');
-      this.doubtPicture = "http://114.116.82.170/" + this.navParams.get('doubtPicture');
+      this.doubtPicture = this.httpProvider.PIC_URL + this.navParams.get('doubtPicture');
       this.cardNumber = this.navParams.get('cardNumber');
       this.doorNumber = this.navParams.get('doorNumber');
+      this.organizationId = this.navParams.get('organizationId');
 
       storage.get('sysUserId').then((data) => { 
-        console.log(data);
+        //console.log(data);
         if (data) {
           this.sysUserId = data;
         }
       });
 
-      storage.get('organizationId').then((data) => { 
-        console.log(data);
-        if (data) {
-          this.organizationId = data;
-        }
-      });
+      this.pic_url = this.httpProvider.PIC_URL;
     }
 
   presentPopover(myEvent) {   
@@ -85,20 +84,31 @@ export class ParkDetailPage {
 
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter(){
     this.getCarList(0);
   }
 
   getCarList(page) {
+    console.log(this.carId);
+    console.log(this.vincode);
+    console.log(this.organizationId);
+
     this.carProvider.carParkSimilarList(page, this.perPage, this.carId, this.organizationId, this.vincode ).then((data) => {
-        console.log(data);
+        console.log(data.rows);
         
+        var items_tmp = [];
         if (data) {
-            if (this.items.length == 0) {
-                this.items = data.rows;
-            } else {
-                this.items = this.items.concat(data.rows);
-            }
+          if ( page == 0) {
+            this.items = items_tmp;
+          }
+          if (this.items.length == 0) {
+              this.items = data.rows.beSimilarCarList;               
+          } else {
+              this.items = this.items.concat(data.rows.beSimilarCarList);
+          }
+
+          this.car = data.rows.carMsgList[0];
+          console.log(this.car);
         }
         
     });
@@ -139,7 +149,8 @@ export class ParkDetailPage {
     var handleTime = item.handleTime;
     var handleResult = item.handleResult;
     var handlePersonName = item.handlePersonName;
-    var doubtPicture = item.doubtPicture;
+    var coverPic = item.coverPic;
+    console.log(coverPic);
     var cardNumber = item.cardNumber;
     var doorNumber = item.doorNumber;
 
@@ -155,7 +166,7 @@ export class ParkDetailPage {
       'handleTime' : handleTime,
       'handleResult' : handleResult,
       'handlePersonName' : handlePersonName, 
-      'doubtPicture' : doubtPicture,
+      'coverPic' : coverPic,
       'cardNumber' : cardNumber,
       'doorNumber' : doorNumber
     });

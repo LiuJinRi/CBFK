@@ -19,45 +19,92 @@
 
 </ion-header>
 
-<ion-content padding center text-center>
-  <img [src]="doubtPicture">  
-  <p>出口门号 ：{{doorNumber}}</p>
-  <p>标签 ID ：{{marketDoubtId}}</p>
-  <p>车 ID ：{{carId}}</p>
-  <p>车牌号 ：{{carNumberPlate}}</p>
-  <p>车架号 : {{vincode}}</p>
-  <p>时间 ：{{createTime}}</p>
-  <p>商铺号 ：{{shopNumber}}</p>
-  <p>合同人 ：{{shopContractorName}}</p>
-  <p>合同人电话 ：{{contactNumber}}</p>
-  <p>处理时间 ：{{handleTime}}</p>
-  <p>处理人 ：{{handlePersonName}}</p>
+<ion-content center text-center>
 
-  <ion-item>
-      <h1 color="danger">类似车辆</h1>
+  <img [src]="pic_url + car.coverPic" style="width:100%;height : auto">
+  <ion-item  class="item11" no-lines>
+    <ion-row>
+      <ion-col align-self-center>
+        <p align-self-center>{{car.carNumberPlate}}</p>
+        <img [src]="'assets/imgs/title2.png'" style="width : 45%;height : auto" > 
+      </ion-col>
+    </ion-row>
   </ion-item>
-  
+  <ion-item  class="item12" no-lines>
+    <ion-row>
+      <ion-col align-self-center color="light">
+        <p>出口门号 ：{{car.doorNumber}}</p>
+      </ion-col>
+      <ion-col align-self-center>
+        <p>标签 ID ：{{car.marketDoubtId}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col align-self-center>
+        <p>车 ID ：{{car.carId}}</p>
+      </ion-col>
+      <ion-col align-self-center>
+        <p>车架号 : {{car.vincode}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col align-self-center>
+        <p>时间 ：{{car.createTime}}</p>
+      </ion-col>
+      <ion-col align-self-center>
+        <p>商铺号 ：{{car.shopNumber}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col align-self-center>
+        <p>合同人 ：{{car.shopContractorName}}</p>
+      </ion-col>
+      <ion-col align-self-center>
+        <p>合同人电话 ：{{car.contactNumber}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col align-self-center>
+        <p>处理时间 ：{{car.handleTime}}</p>
+      </ion-col>
+      <ion-col align-self-center>
+        <p>处理人 ：{{car.handlePersonName}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+
+  <ion-item  class="item13" no-lines>
+    <ion-row>
+      <ion-col align-self-center>
+        <img [src]="'assets/imgs/title3.png'" style="width : 25%;height : auto;" >
+      </ion-col>
+    </ion-row>
+  </ion-item>
 
   <ion-list>
-      <ion-refresher (ionRefresh)="doRefresh($event)">
-          <ion-refresher-content
-                  pullingIcon="arrow-dropdown"
-                  pullingText="下拉刷新"
-                  refreshingSpinner="circles"
-                  refreshingText="加载中...">
-          </ion-refresher-content>
-        </ion-refresher>
-      <ion-item (click)="detail(item)" *ngFor = "let item of items">
-          <ion-avatar item-start>
-            <img [src]="'http://114.116.82.170:8200' + item.doubtPicture ||  'assets/imgs/car.jpg'">
-          </ion-avatar>  
-          <p>车牌号 ：{{item.carNumberPlate}}</p>
-          <p>车架号 : {{item.vincode}}</p>
-          <p>车辆等级 : {{item.dangerLevel}}</p>
-          <p>商铺号 ：{{item.shopNumber}}</p>
-          <p>合同人 ：{{item.shopContractorName}}</p>
-          <p>合同人电话 ：{{item.contactNumber}}</p>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="下拉刷新"
+                refreshingSpinner="circles"
+                refreshingText="加载中...">
+        </ion-refresher-content>
+      </ion-refresher>
 
+      <ion-item (click)="detail(item)" *ngFor = "let item of items" class="item23">          
+          <ion-row>
+          <ion-col align-self-center col-4>
+            <img [src]="pic_url + item.coverPic ||  'assets/imgs/car.jpg'" style="width : 100px;height : 100px; margin-right : 15px"> 
+          </ion-col>
+          <ion-col col-8>
+            <p><B>车牌号 ：{{item.carNumberPlate}}</B></p>
+            <p><B>车辆等级 : {{item.dangerLevel}}</B></p>
+            <p>车架号 : {{item.vincode}}</p>
+            <p>商铺号 ：{{item.shopNumber}}</p>
+            <p>合同人 ：{{item.shopContractorName}}</p>
+            <p>合同人电话 ：{{item.contactNumber}}</p>            
+          </ion-col>
+        </ion-row>
       </ion-item>
       <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
           <ion-infinite-scroll-content

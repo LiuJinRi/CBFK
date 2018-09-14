@@ -1,38 +1,65 @@
 page-login {
-
-    .toolbar-title-md {
-        margin: 0px;
-        text-align: center;
-        color: white;      
-      }
-
-    .header-md {
-        background-color: #00ccff;
-    }
-
-    .content-md {
-        background-color: #ededed;
-        
-    }
-
     .login_bk {
-        background-image: url("/assets/imgs/login_bk.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin-top : 70%; 
+        width:80%;
+        margin-left: 10%;
+        height: auto;
+        align-items: center;
+        z-index: 1;
+        position: fixed;
     }
 
     .content {
-        background-image: url("/assets/imgs/bk.png");
+        background-image: url("/assets/imgs/login_bk.png");
         background-size: cover;
+        background-repeat: no-repeat;
+        opacity: 0.9;
+    }
+
+    .item.item-input {
+        background-color: transparent;
+        color : white;
+    }
+
+    a {
+        color: #ffffff;
+    }
+
+    .label-md-primary, .item-input .label-md-primary, .item-select .label-md-primary, .item-datetime .label-md-primary {
+        color: #ffffff;
+    }
+
+    .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+        border-bottom-color: #ffffff;
+        -webkit-box-shadow: inset 0 -1px 0 0 #ffffff;
+        box-shadow: inset 0 -1px 0 0 #ffffff;
+    }
+
+    .item-md {
+        background-color: transparent;
+        padding-left: 0px;
     }
 
     .register-title {
-        color:#c8c7cc;
+        color:#ffffff;
         left:0;
         right:0;
     
         a {
-          color:red;
+          color:#ffffff;
         }
-      }
+    }
+
+    .button-inner {
+        color : white;
+        font-size: 20px;
+    }
+
+ 
+
+
 
 }
 

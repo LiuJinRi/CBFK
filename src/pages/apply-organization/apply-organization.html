@@ -17,18 +17,22 @@
 
 </ion-header>
 
-<ion-content padding>
-  <div style="text-align: center; margin: 20px;">
-
-    <ion-searchbar (ionInput)="filterItems($event)" placeholder="请输入组织代码" style="border-radius: 20px" ></ion-searchbar>
-
-    <ion-item text-center>
-      <h1>{{organizationName}}</h1>
-    </ion-item>
-
-    <button ion-button round color="lightText" (click)="doApply()" style="margin : 20px">
-        申请加入
-    </button>
-  </div>
-
+<ion-content>
+  <ion-list>
+      <ion-item center text-center class="item11" no-lines>
+          <img [src]="'assets/imgs/organization.png'" style="width : 40%;height : auto"> 
+      </ion-item>
+      <ion-item text-center class="item1" no-lines>
+        <ion-searchbar (ionInput)="filterItems($event)" placeholder="请输入组织代码" style="border-radius: 20px" ></ion-searchbar>
+      </ion-item>
+      
+      <ion-item text-center class="item1">
+        <h1>{{organizationName}}</h1>
+      </ion-item>
+      <ion-row  center text-center>
+        <button ion-button block color="lightText" (click)="doApply()" style="margin : 20px">
+            申请加入
+        </button>
+      </ion-row>
+    </ion-list>
 </ion-content>

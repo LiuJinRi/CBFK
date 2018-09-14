@@ -11,42 +11,40 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-list>
-    <ion-item >
-      <ion-avatar item-start>
-        <img [src]="'assets/imgs/person.jpg'">
-      </ion-avatar>  
-      <p>{{userName}}</p>
+    <ion-item center text-center class="item11" no-lines>
+        <img [src]="'assets/imgs/head.png'" style="width : 40%;height : auto"> 
+        <p>{{userName}}</p>
     </ion-item>
-    <button ion-item (click)="doChangeHandphone()">
-      <ion-icon name="phone-portrait" color="secondary"></ion-icon>
+    <button ion-item (click)="doChangeHandphone()" class="item1" no-lines>
+      <ion-icon name="phone-portrait" color="grey"></ion-icon>
       手机
       <span  item-end>{{phonenumber}}</span>
     </button>
-    <button ion-item >
-      <ion-icon name="mail" color="secondary"></ion-icon>
+    <button ion-item class="item2" no-lines>
+      <ion-icon name="mail" color="grey"></ion-icon>
       邮箱
       <span  item-end>{{emailaddress}}</span>
     </button>
-    <button ion-item (click)="doChangeOrganization()">
-      <ion-icon name="contacts" color="secondary"></ion-icon>
+    <button ion-item (click)="doChangeOrganization()" class="item1" no-lines>
+      <ion-icon name="contacts" color="grey"></ion-icon>
       组织
       <span  item-end>{{organizationName}}</span>
     </button>
-    <button ion-item>
-      <ion-icon name="chatboxes" color="secondary"></ion-icon>
+    <button ion-item class="item2" no-lines>
+      <ion-icon name="chatboxes" color="grey"></ion-icon>
       状态
       <span  item-end *ngIf="status == '0'">无组织</span>
       <span  item-end *ngIf="status == '1'">组织申请中</span>
       <span  item-end *ngIf="status == '2'">组织审核未通过</span>
       <span  item-end *ngIf="status == '3'">正常</span>
+      <span  item-end *ngIf="status == '4'">组织过期</span>
     </button>
-    <button ion-item (click)="doChangeSetting()">
-      <ion-icon name="settings" color="secondary"></ion-icon>
+    <button ion-item (click)="doChangeSetting()" class="item1" no-lines>
+      <ion-icon name="settings" color="grey"></ion-icon>
       设置
     </button>
-    <button ion-item></button>
   </ion-list>
 
 </ion-content>

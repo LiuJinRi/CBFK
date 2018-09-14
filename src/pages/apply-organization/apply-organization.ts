@@ -5,6 +5,7 @@ import { Storage } from '../../../node_modules/@ionic/storage';
 import { ToastProvider } from '../../providers/toast/toast';
 import {UserProvider} from "./../../providers/user/user";
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the ApplyOrganizationPage page.
@@ -75,7 +76,7 @@ export class ApplyOrganizationPage {
      
         this.nativePageTransitions.slide(options);
 
-        this.navCtrl.push(MinePage);
+        this.navCtrl.push(TabsPage, {tabindex:"3"});
       } else {
         this.toastProvider.show(data['msg'], 'errors');
       }

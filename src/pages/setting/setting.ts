@@ -5,6 +5,7 @@ import { ChangepasswordPage } from '../changepassword/changepassword';
 import {Storage} from '@ionic/storage';
 import { LoginPage } from '../login/login';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the SettingPage page.

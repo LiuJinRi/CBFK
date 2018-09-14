@@ -38,8 +38,8 @@ export class ResetPasswordPage {
         'loginName': ['', [Validators.required, AccountValidator.isValid]],
         'phonenumber': ['', [Validators.required, AccountValidator.isValidPhone]],
         'verificationCode': ['', [Validators.required]],
-        'newpassword': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(16)]],
-        'newpassword1': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(16)]]
+        'newPassword': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(16)]],
+        'newPassword1': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(16)]]
     });
   }
 
@@ -118,12 +118,12 @@ export class ResetPasswordPage {
             return;
           }
 
-          if (this.resetForm.value['newpassword'] == "") {
+          if (this.resetForm.value['newPassword'] == "") {
             this.toastProvider.show('请输入密码', 'error')
             return;
           }
 
-          if (this.resetForm.value['newpassword1'] == "") {
+          if (this.resetForm.value['newPassword1'] == "") {
             this.toastProvider.show('请输入密码', 'error')
             return;
           }
@@ -137,7 +137,7 @@ export class ResetPasswordPage {
       }
 
       
-      if ( this.resetForm.value['newpassword'] != this.resetForm.value['newpassword1'] ) {
+      if ( this.resetForm.value['newPassword'] != this.resetForm.value['newPassword1'] ) {
         this.toastProvider.show('密码不一致，重新输入一下', 'error')
         return;
        }

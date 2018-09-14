@@ -41,7 +41,7 @@ export class LevelmenuPage {
   }
 
   close() {
-    //this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss();
   }
 
   reactivate() {
@@ -52,20 +52,20 @@ export class LevelmenuPage {
       console.log(data)
       if (data.msg == "成功") {
         this.toastProvider.show("车辆再激活成功",'success');
-        this.navCtrl.push(LevelPage);
+        this.navCtrl.push(TabsPage, {tabindex:"1"});
         this.viewCtrl.dismiss();
       } else {
         this.toastProvider.show("车辆再激活失败",'errors');
-        this.navCtrl.push(LevelPage);
+        this.navCtrl.push(TabsPage, {tabindex:"1"});
         this.viewCtrl.dismiss();
       }
     }).catch((err)=>{
       return;
     });
-    
   }
 
   level() {
+    this.viewCtrl.dismiss();
     let confirm = this.alertCtrl.create({
       title: '设备等级',
       inputs: [
@@ -83,15 +83,15 @@ export class LevelmenuPage {
           },
           {
               text: '是',
-              cssClass: 'my-alert-danger',
               handler: data => {
                 this.carProvider.carLevelChange(this.carId, data.level).then((data)=>{
                   if (data.msg == "成功") {
                     this.toastProvider.show("设置等级成功",'success');
-                    this.navCtrl.push(LevelPage);
+                    this.navCtrl.push(TabsPage, {tabindex:"1"});
                     this.viewCtrl.dismiss();
                   } else {
                     this.toastProvider.show("设置等级失败",'errors');
+                    this.navCtrl.push(TabsPage, {tabindex:"1"});
                     this.viewCtrl.dismiss();
                   }
                 }).catch((err)=>{
@@ -109,7 +109,7 @@ export class LevelmenuPage {
     this.viewCtrl.dismiss();
   }
 
-  information() {
+  information() { 
     this.navCtrl.push(LevelInformationPage, {'deviceBoxId' : this.deviceBoxId});
     this.viewCtrl.dismiss();
   }

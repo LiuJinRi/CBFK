@@ -1,3 +1,4 @@
+import { HttpProvider } from './../../providers/http/http';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CarProvider } from '../../providers/car/car';
@@ -5,6 +6,7 @@ import { Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { Storage } from '../../../node_modules/@ionic/storage';
 import { ToastProvider } from '../../providers/toast/toast';
 import { ParkDetailPage } from '../park-detail/park-detail';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the ParkPage page.
@@ -24,16 +26,19 @@ export class ParkPage {
   public findForm: FormGroup;
   public sysUserId : string = null;
   organizationId : string = null;
+  pic_url : string = null;
 
   constructor(public navCtrl: NavController,
     public carProvider : CarProvider,
     private formBuilder: FormBuilder,
     public storage : Storage,
-    public toastProvider : ToastProvider) {
+    public toastProvider : ToastProvider,
+    public httpProvider : HttpProvider) {
+      /*
       this.findForm = this.formBuilder.group({
         'searchtext': ['', [Validators.required]]
       });
-
+      */
       storage.get('sysUserId').then((data) => { 
         console.log(data);
         if (data) {
@@ -47,13 +52,16 @@ export class ParkPage {
           this.organizationId = data;
         }
       });
+
+      this.pic_url = this.httpProvider.PIC_URL;
   }
 
   ionViewWillEnter() {
+    /*
     this.findForm = this.formBuilder.group({
       'searchtext': ['', [Validators.required]]
     });
-
+    */
     this.getCarList(0);
   }
 
@@ -98,6 +106,23 @@ export class ParkPage {
     }, 2000);
   }
 
+  filterItems(ev: any) {
+    var items_tmp = [];
+    let val = ev.target.value;
+    this.items = items_tmp;
+    if (val && val.trim() != '') { 
+      this.carProvider.findCarMsg(val, 3, this.sysUserId, this.organizationId).then((data)=>{
+        console.log(data);
+        this.items = data.rows;   
+      }).catch((err)=>{
+        return;
+      });
+    } else {
+      this.getCarList(0);
+    }
+  }
+
+  /*
   doFind() {
     var val = this.findForm.value['searchtext'];
     console.log(val);
@@ -110,7 +135,7 @@ export class ParkPage {
       });
     }
   }
-
+  */
   detail( item ) {
     var marketDoubtId = item.marketDoubtId;
     var carId = item.carId;
@@ -141,7 +166,8 @@ export class ParkPage {
       'handlePersonName' : handlePersonName, 
       'doubtPicture' : doubtPicture,
       'cardNumber' : cardNumber,
-      'doorNumber' : doorNumber
+      'doorNumber' : doorNumber,
+      'organizationId' : this.organizationId
     });
 
   }

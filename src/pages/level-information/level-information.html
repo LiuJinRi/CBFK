@@ -17,13 +17,26 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-searchbar  (ionInput)="filterItems($event)" placeholder="请输入信息内容" style=" width : 100%;border-radius: 20px" ></ion-searchbar>
   <ion-list>
-    <ion-item *ngFor = "let item of items">
-        <p>分类 ：{{item.type}}</p>
-        <p>内容 ：{{item.msgs}}</p>
-        <p>时间 ：{{item.createTime}}</p>
+    <ion-card *ngFor = "let item of items">
 
-    </ion-item>
+      <ion-card-header style="white-space: normal;">
+        <h2 class="ptype" center text-center> 分类 ：{{item.type}}信息</h2>
+      </ion-card-header>
+
+      <ion-card-content>
+        <h2> <ion-icon name="list-box"></ion-icon>时间 ：{{item.createTime}}</h2>
+        <h2> <ion-icon name="list-box"></ion-icon>内容 ：{{item.msgs}}</h2>
+      </ion-card-content>
+
+  </ion-card>  
+    
+    <!--ion-item *ngFor = "let item of items" >
+      <p class="ptype" center text-center>分类 ：{{item.type}}信息</p>
+      <p>时间 ：{{item.createTime}}</p>
+      <p>内容 ：{{item.msgs}}</p>
+    </ion-item-->
   </ion-list>
 </ion-content>

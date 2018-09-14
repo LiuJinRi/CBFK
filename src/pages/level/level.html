@@ -7,7 +7,11 @@
 <ion-header>
 
   <ion-navbar>
-    <!--ion-title>绑定</ion-title-->
+    <ion-row>
+      <ion-title style="width : 10%" center text-center>等级</ion-title>
+      <ion-searchbar  (ionInput)="filterItems($event)" placeholder="请输入车架号" style=" width : 80%;border-radius: 20px" ></ion-searchbar>
+    </ion-row>
+    <!--
     <ion-title>
         <form [formGroup]="findForm" (ngSubmit)="doFind()">
           <ion-item color="primary" no-lines>
@@ -19,6 +23,7 @@
           </ion-item>
         </form>         
     </ion-title>
+    -->
   </ion-navbar>
 
 </ion-header>
@@ -36,28 +41,34 @@
   <ion-list>
       <ion-item-sliding *ngFor = "let item of items">
           <ion-item (click)="detail(item)">
-              <ion-avatar item-start>
-                <img [src]="'http://114.116.82.170/' + item.coverPic ||  'assets/imgs/car.jpg'">
-              </ion-avatar>  
-              <p *ngIf="item.carType == 1">车种类 ：金融车</p>
-              <p *ngIf="item.carType == 2">车种类 ：门禁车</p>
-              <p>车牌号 ：{{item.carNumberPlate}}</p>
-              <p>车架号 ：{{item.vincode}}</p>
-              <p>车辆等级 : {{item.dangerLevel}}</p>
-              <p *ngIf="item.isEnter == 1">在场情况 ：在场</p>
-              <p *ngIf="item.isEnter == 2">在场情况 ：不在场</p>
-              <p *ngIf="item.isInStock == 1">在库情况 ：在库</p>
-              <p *ngIf="item.isInStock == 2">在库情况 ：不在库</p>
-              <p>设备码 ：{{item.boxCode}}</p>
-              <p>商铺号 ：{{item.shopNumber}}</p>
-              <p>合同人 ：{{item.shopContractorName}}</p>
+            <ion-row>
+                <ion-col align-self-center col-3>
+                  <img [src]="pic_url + item.coverPic ||  'assets/imgs/car.jpg'" style="width : 100px;height : 100px"> 
+                </ion-col>
+                <ion-col col-9>
+                  <p *ngIf="item.carType == 1"><B>车种类 ：金融车</B></p>
+                  <p *ngIf="item.carType == 2"><B>车种类 ：门禁车</B></p>
+                  <p><B>车牌号 ：{{item.carNumberPlate}}</B></p>
+                  
+                  <img [src]="'assets/imgs/line.png'" style="width : 100%;height : auto">
+                  
+                  <p>车架号 ：{{item.vincode}}</p>
+                  <p>车辆等级 : {{item.dangerLevel}}</p>
+                  <p>设备编码 ：{{item.boxCode}}</p>
+                  <p>商铺号 ：{{item.shopNumber}}</p>
+                  <p>合同人 ：{{item.shopContractorName}}</p>
+                </ion-col>
+            </ion-row>             
           </ion-item>
 
           <ion-item-options side="right">
+            <div style="background : url('assets/imgs/shortcut.png');width : auto;height:100%">
               <button ion-button color="caidan" (click)="reactive(item)">再激活</button>
               <button ion-button color="caidan" (click)="level(item)">设备等级</button>
               <button ion-button color="caidan" (click)="locate(item)">车辆位置</button>
               <button ion-button color="caidan" (click)="information(item)">最新信息</button>
+            </div>
+              
           </ion-item-options>
           
         </ion-item-sliding>

@@ -6,6 +6,7 @@ import {Storage} from '@ionic/storage';
 import {ToastProvider} from "../../providers/toast/toast";
 import { SettingPage } from '../setting/setting';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the ChangepasswordPage page.
@@ -23,10 +24,12 @@ export class ChangepasswordPage {
   cahngePasswordForm: FormGroup;
   sysUserId : string = null;
   password : string = null;
+  oldpassword : string = null;
   newpassword : string = null;
   newpassword1 : string = null;
   public isShowPassword: boolean = false;
   public isShowPassword1: boolean = false;
+  public isShowPassword2: boolean = false;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -36,6 +39,7 @@ export class ChangepasswordPage {
     private storage: Storage,
     private nativePageTransitions : NativePageTransitions) {
       this.cahngePasswordForm = this.formBuilder.group({
+        'password': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(16)]],
         'newpassword': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(16)]],
         'newpassword1': ['', [Validators.required, Validators.minLength(1), Validators.maxLength(16)]]
       });
@@ -46,13 +50,9 @@ export class ChangepasswordPage {
           this.sysUserId = data;
         }
       });
-
-      storage.get('password').then((data) => { 
-        console.log(data);
-        if (data) {
-          this.password = data;
-        }
-      });
+      
+      
+      
     }
 
   ionViewDidLoad() {
@@ -68,13 +68,35 @@ export class ChangepasswordPage {
     this.isShowPassword1 = !this.isShowPassword1;
   }
 
+  showPassword2($event) {
+    $event.preventDefault();
+    this.isShowPassword2 = !this.isShowPassword2;
+  }
+
   doResetPassword() {
     
     //if (!this.cahngePasswordForm.valid) {
-      
+      console.log(this.cahngePasswordForm.value['password']);
       console.log(this.cahngePasswordForm.value['newpassword']);
       console.log(this.cahngePasswordForm.value['newpassword1']);
 
+      this.storage.get('password').then((data) => { 
+        console.log(data);
+        if (data) {
+          this.oldpassword = data;
+        }
+      });
+
+      if (this.cahngePasswordForm.value['password'] == "") {
+        this.toastProvider.show('请输入正确的旧密码', 'error')
+        return;
+      }
+
+      if (this.cahngePasswordForm.value['password'] != this.oldpassword) {
+        this.toastProvider.show('旧密码错误', 'error')
+        return;
+      }
+      
       if (this.cahngePasswordForm.value['newpassword'] == "") {
         this.toastProvider.show('请输入正确的新密码', 'error')
         return;
@@ -95,7 +117,8 @@ export class ChangepasswordPage {
         return;
       }
     //}
-
+    
+    this.password = this.cahngePasswordForm.value['password'];
     this.newpassword = this.cahngePasswordForm.value['newpassword'];
 
     this.userProvider.changeSettingPassword(this.sysUserId, this.password, this.newpassword).then((data) => {

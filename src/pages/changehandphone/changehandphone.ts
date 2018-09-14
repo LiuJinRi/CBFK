@@ -8,6 +8,7 @@ import {ToastProvider} from "../../providers/toast/toast";
 import { MinePage } from '../mine/mine';
 import { HandphonePage } from '../handphone/handphone';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
+import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the ChangehandphonePage page.
  *
@@ -26,9 +27,7 @@ export class ChangehandphonePage {
   public timerText: string = "发送验证码";
   public timerRemainSeconds: number = 60;
   public cahngeHandphoneForm: FormGroup;
-  public verify_code: string = null;
   sysUserId : string = null;
-  phone : string = null;
   
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -37,7 +36,6 @@ export class ChangehandphonePage {
     private formBuilder: FormBuilder,
     private storage: Storage,
     private nativePageTransitions : NativePageTransitions) {
-      this.phone = this.navParams.get('phone');
       this.cahngeHandphoneForm = this.formBuilder.group({
         'newphonenumber': ['', [Validators.required, AccountValidator.isValidPhone]],
         'verificationCode': ['', [Validators.required]]
@@ -54,7 +52,7 @@ export class ChangehandphonePage {
   sendCode($event) {
     $event.preventDefault();
 
-    this.userProvider.getCode(this.cahngeHandphoneForm.value['oldphonenumber']).then((response) => {
+    this.userProvider.getCode(this.cahngeHandphoneForm.value['newphonenumber']).then((response) => {
         if (response) {
             console.log(response['msg']);
             if ( response['msg'] == "成功") {
@@ -96,10 +94,13 @@ export class ChangehandphonePage {
         }
       }
 
-      this.userProvider.changePhoneNext(this.sysUserId, this.phone, this.verify_code).then((data) => {
-        if (data.msg == "成功") {
+      var telephoneNumber = this.cahngeHandphoneForm.value['newphonenumber'];
+      var verificationCode = this.cahngeHandphoneForm.value['verificationCode'];
+
+      this.userProvider.changePhoneNext(this.sysUserId, telephoneNumber, verificationCode).then((data) => {
+        if (data['msg'] == "成功") {
           this.toastProvider.show("变更手机号成功",'success');
-          this.storage.set('phonenumber', this.phone);
+          this.storage.set('phonenumber', telephoneNumber);
 
           let options: NativeTransitionOptions = {
             direction: 'left',
@@ -109,9 +110,9 @@ export class ChangehandphonePage {
            };
        
           this.nativePageTransitions.slide(options);
-          this.navCtrl.push(MinePage);
+          this.navCtrl.push(TabsPage, {tabindex:"3"});
         } else {
-          this.toastProvider.show("变更手机号失败", 'errors');
+          this.toastProvider.show(data['msg'], 'errors');
 
           let options: NativeTransitionOptions = {
             direction: 'right',
