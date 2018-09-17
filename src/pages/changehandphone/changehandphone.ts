@@ -9,12 +9,6 @@ import { MinePage } from '../mine/mine';
 import { HandphonePage } from '../handphone/handphone';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { TabsPage } from '../tabs/tabs';
-/**
- * Generated class for the ChangehandphonePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -42,7 +36,6 @@ export class ChangehandphonePage {
     });
 
     storage.get('sysUserId').then((data) => { 
-      console.log(data);
       if (data) {
         this.sysUserId = data;
       }
@@ -54,7 +47,6 @@ export class ChangehandphonePage {
 
     this.userProvider.getCode(this.cahngeHandphoneForm.value['newphonenumber']).then((response) => {
         if (response) {
-            console.log(response['msg']);
             if ( response['msg'] == "成功") {
                 this.toastProvider.show('验证码已发送，请注意查收', 'success')
                 this.isTimerStart = true;

@@ -127,13 +127,6 @@ export class ResetPasswordPage {
             this.toastProvider.show('请输入密码', 'error')
             return;
           }
-
-           /* 
-          if (this.resetForm.value['renewpassword'] == "") {
-            this.toastProvider.show('请输入密码', 'error')
-            return;
-          }
-          */
       }
 
       
@@ -141,13 +134,7 @@ export class ResetPasswordPage {
         this.toastProvider.show('密码不一致，重新输入一下', 'error')
         return;
        }
-      /*
-      if ( this.verify_code != this.resetForm.value['verificationCode'] ) {
-        this.toastProvider.show('验证码错误，重新输入一下', 'error')
-        return;
-       }
-       */
-
+       
       var loginName =  this.resetForm.value['loginName'];
       var newPassword =  this.resetForm.value['newPassword'];
       var phonenumber =  this.resetForm.value['phonenumber'];

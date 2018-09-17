@@ -9,21 +9,12 @@ import { ToastProvider } from '../../providers/toast/toast';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { TabsPage } from '../tabs/tabs';
 
-/**
- * Generated class for the MatchingPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-
 @Component({
   selector: 'page-matching',
   templateUrl: 'matching.html',
 })
 export class MatchingPage {
   
-  //private  responsedata : ResponseData;
   public items: any = [];
   public perPage: number = 10;
   public searchText:string = null;

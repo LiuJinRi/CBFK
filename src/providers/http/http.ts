@@ -1,7 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
 import {Http, Response} from '@angular/http';
-// import { Observable } from 'rxjs/Observable';
-import {Observable} from 'rxjs/Rx'
 import {Headers, RequestOptions, URLSearchParams} from '@angular/http';
 import {App, NavController, Platform, ToastController} from 'ionic-angular';
 
@@ -12,7 +10,6 @@ import {Storage} from '@ionic/storage';
 @Injectable()
 export class HttpProvider {
     host: string;
-    // API_URL = 'http://localhost:8080/api';
     public API_URL = 'http://114.116.82.170:8200';
     public PIC_URL = "http://114.116.82.170/"
 
@@ -23,20 +20,6 @@ export class HttpProvider {
                 protected app: App,
                 private storage: Storage) {
 
-            // cordova.plugins.AppConfig.fetch(['JPUSH_CHANNEL'], result=> {
-            //     if(result){
-            //         console.log(result);
-            //         if(result.JPUSH_CHANNEL) {
-            //             this.channel = result.JPUSH_CHANNEL;
-            //         }
-            //     } else {
-            //         if(this.platform.is('ios')) {
-            //             this.channel = "appstore";
-            //         } else {
-            //             this.channel = "default";
-            //         }
-            //     }
-            // });
     }
 
     public httpGetWithAuth(url: string, params: URLSearchParams) {
@@ -146,7 +129,6 @@ export class HttpProvider {
         let msg = error.text ? error.json().message : '请求地址错误';
 
         if (error.status == 400) {
-            // this.app.getActiveNav().push('login-default');
             this.app.getRootNav().push('login-default');
         }
 
@@ -160,6 +142,5 @@ export class HttpProvider {
         toast.present();
 
         return Promise.reject(msg);
-        // return Observable.throw(msg);
     }
 }

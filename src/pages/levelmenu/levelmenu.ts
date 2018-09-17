@@ -8,12 +8,6 @@ import { LevelLocatePage } from '../level-locate/level-locate';
 import { LevelPage } from '../level/level';
 import { TabsPage } from '../tabs/tabs';
 
-/**
- * Generated class for the LevelmenuPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -32,7 +26,6 @@ export class LevelmenuPage {
     public app: App,
     public toastProvider : ToastProvider,
     public alertCtrl : AlertController) {
-      //console.log(this.navParams);
         if (this.navParams.data) {
             this.carId = this.navParams.get('carId');
             this.dangerLevel = this.navParams.get('dangerLevel');
@@ -45,8 +38,6 @@ export class LevelmenuPage {
   }
 
   reactivate() {
-    //
-    console.log(this.deviceBoxId);
     this.viewCtrl.dismiss();
     this.carProvider.carReactivate(this.deviceBoxId).then((data)=>{
       console.log(data)

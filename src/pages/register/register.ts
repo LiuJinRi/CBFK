@@ -143,13 +143,6 @@ export class RegisterPage {
 
       }
 
-      /*
-      if ( this.verify_code != this.registerForm.value['verificationCode'] ) {
-        this.toastProvider.show('验证码错误，重新输入一下', 'error')
-        return;
-      }
-      */
-
      var loginName =  this.registerForm.value['loginName'];
      var password =  this.registerForm.value['password'];
      var userName =  this.registerForm.value['userName'];

@@ -6,7 +6,6 @@ import {ToastProvider} from "../../providers/toast/toast";
 import { MinePage } from '../mine/mine';
 import { ApplyOrganizationPage } from '../apply-organization/apply-organization';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
-import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the OrganizationPage page.
@@ -72,8 +71,6 @@ export class OrganizationPage {
   }
 
   exitOrganization() {
-    console.log(this.organizationName);
-    console.log(this.sysUserId);
     if( this.status == 3 ) {
       let confirm = this.alertCtrl.create({
         title: '提示',

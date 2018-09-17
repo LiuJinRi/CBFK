@@ -48,7 +48,6 @@ export class ParkMenuPage {
   }
 
   pass(handleResult) {
-    //this.viewCtrl.dismiss();
     console.log(handleResult);
     console.log(this.marketDoubtId);
     console.log(this.sysUserId);

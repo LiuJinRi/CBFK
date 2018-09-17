@@ -7,13 +7,6 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Storage } from '../../../node_modules/@ionic/storage';
 import { TabsPage } from '../tabs/tabs';
 
-/**
- * Generated class for the MacthingmenuPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-macthingmenu',
@@ -112,7 +105,6 @@ scan() {
    }).catch(err => {
        console.log('Error', err);
    });
-   //this.viewCtrl.dismiss();
   }
 
   ionViewDidLoad() {

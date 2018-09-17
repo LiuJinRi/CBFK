@@ -9,12 +9,6 @@ import { ChangehandphonePage } from '../changehandphone/changehandphone';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { TabsPage } from '../tabs/tabs';
 
-/**
- * Generated class for the HandphonePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -52,7 +46,6 @@ export class HandphonePage {
 
     this.userProvider.getCode(this.handphoneForm.value.oldphonenumber).then((response) => {
         if (response) {
-            console.log(response['msg']);
             if ( response['msg'] == "成功") {
                 this.toastProvider.show('验证码已发送，请注意查收', 'success')
                 this.isTimerStart = true;
@@ -106,13 +99,6 @@ export class HandphonePage {
           } 
       }).catch((err) => {
           console.log(err);
-      });
-
-
-      //this.navCtrl.push(ChangehandphonePage, {'phone' : '15840135239'});
-      
+      });      
   }
-
-  
-
 }

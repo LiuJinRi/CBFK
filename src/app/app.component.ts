@@ -24,8 +24,6 @@ export class MyApp {
     public toastProvider: ToastProvider,
     userProvider: UserProvider) {
       platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
         var lastTimeBackPress = 0;
         var timePeriodToExit  = 2000;
 
@@ -46,20 +44,6 @@ export class MyApp {
           }
         });
         this.rootPage = LoginPage;
-        /*
-        storage.ready().then(() => {
-          storage.get('isRemember').then(           
-            (value: string) => {
-              toastProvider.show(value, 'errors');
-              console.log(value);
-              if ( value == "false" || value == null ) {
-                this.rootPage = LoginPage;
-              } else {
-                this.rootPage = TabsPage;
-              }
-            });
-        });
-        */
     });
   }
 }

@@ -1,50 +1,27 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
-import {Storage} from '@ionic/storage';
 import {HttpProvider} from '../http/http';
 import {URLSearchParams} from '@angular/http';
-import {App, Events, ModalController, Platform} from "ionic-angular";
-import {ToastProvider} from "../../providers/toast/toast";
 
 @Injectable()
 export class UserProvider {
 
-    constructor(public httpProvider: HttpProvider,
-                private storage: Storage,
-                private app: App,
-                private events: Events,
-                private modalCtrl: ModalController,
-                private toastProvider: ToastProvider,
-                private platform: Platform) {
+    constructor(public httpProvider: HttpProvider) {
 
     }
 
+    //登录
     login(loginName, password){
-        /*
-        let param = {
-            loginName: loginName,
-            password: password
-        };
-        let body = JSON.stringify(param);
-        return this.httpProvider.httpPostWithAuth("/sys/login/login", body);
-        */
+
         let params: URLSearchParams = new URLSearchParams();
         params.set('loginName', loginName);
         params.set('password', password);
         return this.httpProvider.httpGetNoAuth("/sys/login/login", params);
     }
 
+    // 变更密码
     changePassword(loginName, newPassword, phonenumber, verificationCode) {
-        /*
-        let param = {
-            loginName: loginName,
-            newPassword: newPassword,
-            verificationCode: verificationCode,
-            phonenumber: phonenumber
-        };
-        let body = JSON.stringify(param);
-        return this.httpProvider.httpPostWithAuth("/sys/login/findPassword", body);
-        */
+
         let params: URLSearchParams = new URLSearchParams();
         params.set('loginName', loginName);
         params.set('newPassword', newPassword);
@@ -53,20 +30,8 @@ export class UserProvider {
         return this.httpProvider.httpPostNoAuth("/sys/login/findPassword", params);
     }
 
-   
+   //注册
     register(loginName,password,verificationCode,userName,phonenumber,email) {
-        /*
-        let param = {
-            loginName: loginName,
-            password: password,
-            userName: userName,
-            phonenumber: phonenumber,
-            verificationCode: verificationCode,
-            email: email
-        };
-        let body = JSON.stringify(param);
-        return this.httpProvider.httpPostNoAuth("/sys/login/sysRegister", body);
-        */
 
         let params: URLSearchParams = new URLSearchParams();
         params.set('loginName', loginName);
@@ -78,16 +43,8 @@ export class UserProvider {
         return this.httpProvider.httpGetNoAuth("/sys/login/sysRegister", params);
     }
 
+    //获取验证码
     getCode(phonenumber) {
-        /*
-        let param = {
-            phonenumber: phonenumber
-        };
-
-        let body = JSON.stringify(param);
-
-        return this.httpProvider.httpPostWithAuth("/sys/login/getCode", body);
-        */
         
         let params: URLSearchParams = new URLSearchParams();
         params.set('phoneNumber', phonenumber);
@@ -95,6 +52,7 @@ export class UserProvider {
         
     }
 
+    //变更手机号
     changePhone(telephoneNumber, verificationCode) {
         let param = {
             telephoneNumber: telephoneNumber,
@@ -104,6 +62,7 @@ export class UserProvider {
         return this.httpProvider.httpPostNoAuth("/setting/my/changePhoneNumber", body);
     }
 
+    //变更手机号下一步
     changePhoneNext(sysUserId, newTelephonenumber, verificationCode) {
         let param = {
             sysUserId : sysUserId,
@@ -114,6 +73,7 @@ export class UserProvider {
         return this.httpProvider.httpPostNoAuth("/setting/my/nextStep", body);
     }
 
+    //变更密码
     changeSettingPassword (sysUserId, password, newPassword) {
         let param = {
             sysUserId : sysUserId,
@@ -124,29 +84,17 @@ export class UserProvider {
         return this.httpProvider.httpPostNoAuth("/setting/my/changePassword", body);
     }
 
+    //查询组织代码
     findOrganization(organizationCode) {
-        /*
-        let param = {
-            organizationCode : organizationCode
-        };
-        let body = JSON.stringify(param);
-        return this.httpProvider.httpPostWithAuth("/setting/organization/find", body);
-        */
+
         let params: URLSearchParams = new URLSearchParams();
         params.set('organizationCode', organizationCode);
         return this.httpProvider.httpGetNoAuth("/setting/organization/find", params);
     }
 
+    //添加组织
     applyOrganization(organizationName, sysUserId) {       
-        /*
-        let param = {
-            organizationName : organizationName,
-            sysUserId : sysUserId
-        };
-        let body = JSON.stringify(param);
-        return this.httpProvider.httpPostNoAuth("/setting/organization/applyfor", body);
-        */
-        
+
         let params: URLSearchParams = new URLSearchParams();
         params.set('organizationName', organizationName);
         params.set('sysUserId', sysUserId);
@@ -154,6 +102,8 @@ export class UserProvider {
         
     }
 
+
+    //退出组织
     exitOrganization(organizationName, sysUserId) {
         console.log(organizationName);
         console.log(sysUserId);
@@ -164,11 +114,6 @@ export class UserProvider {
         };
         let body = JSON.stringify(param);
         return this.httpProvider.httpPostNoAuth("/setting/organization/exit", body);
-        /*
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('organizationName', organizationName);
-        params.set('sysUserId', sysUserId);
-        return this.httpProvider.httpGetNoAuth("/setting/organization/exit", params);
-        */
+
     }
 }

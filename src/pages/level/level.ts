@@ -9,12 +9,6 @@ import { Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { Storage } from '../../../node_modules/@ionic/storage';
 import { ToastProvider } from '../../providers/toast/toast';
 import { TabsPage } from '../tabs/tabs';
-/**
- * Generated class for the LevelPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -38,11 +32,6 @@ export class LevelPage {
     public toastProvider : ToastProvider,
     public alertCtrl : AlertController,
     private httpProvider : HttpProvider) {
-      /*
-      this.findForm = this.formBuilder.group({
-        'searchtext': ['', [Validators.required]]
-      });
-      */  
       storage.get('sysUserId').then((data) => { 
         console.log(data);
         if (data) {
@@ -61,18 +50,12 @@ export class LevelPage {
   }
 
   ionViewWillEnter() {
-    /*
-    this.findForm = this.formBuilder.group({
-      'searchtext': ['', [Validators.required]]
-    });
-    */
-
     this.getCarList(0);
   }
 
+  //等级列表
   getCarList(page) {
     this.carProvider.carLevelList(page, this.perPage, this.organizationId).then((data) => {
-        console.log(data);
         var items_tmp = [];
         if (data) {
           if ( page == 0) {
@@ -88,6 +71,8 @@ export class LevelPage {
     });
   }
 
+
+  //重新下载
   doRefresh(refresher) {
 
     this.getCarList(0);
@@ -97,6 +82,7 @@ export class LevelPage {
     }, 2000);
   }
 
+  //scroll
   doInfinite(infiniteScroll) {
 
     var num = this.items.length;
@@ -110,18 +96,8 @@ export class LevelPage {
         infiniteScroll.complete();
     }, 2000);
   }
-  /*
-  doFind() {
-    var val = this.findForm.value['searchtext'];
-    if (val && val.trim() != '') { 
-      this.carProvider.findCarMsg(val, 2, this.sysUserId, this.organizationId).then((data)=>{
-        this.items = data.rows;
-      }).catch((err)=>{
-        return;
-      });
-    }
-  }
-  */
+
+  //过滤项目
   filterItems(ev: any) {
     var items_tmp = [];
     let val = ev.target.value;
@@ -138,6 +114,7 @@ export class LevelPage {
     }
   }
 
+  //详情
   detail( item ) {
     console.log(item);
     var carId = item.carId;
@@ -145,14 +122,13 @@ export class LevelPage {
     this.navCtrl.push(LevelDetailPage, { 'carId' : carId, 'carType' : carType });
   }
 
+  //再激活
   reactive(item) {
     this.carProvider.carReactivate(item.deviceBoxId).then((data)=>{
       console.log(data)
       if (data.msg == "成功") {
         this.toastProvider.show("车辆再激活成功",'success');
         this.navCtrl.push(TabsPage, {tabindex:"1"});
-        //this.items.clear();
-        //this.getCarList(0);
       } else {
         this.toastProvider.show("车辆再激活失败",'errors');
         return;
@@ -163,6 +139,7 @@ export class LevelPage {
 
   }
 
+  //设备等级
   level(item) {
     let confirm = this.alertCtrl.create({
       title: '设备等级',
@@ -203,10 +180,12 @@ export class LevelPage {
     confirm.present();
   }
 
+  //位置
   locate(item) {
     this.navCtrl.push(LevelLocatePage, {'deviceBoxId':item.deviceBoxId});
   }
 
+  //最新信息
   information(item) {
     this.navCtrl.push(LevelInformationPage, {'deviceBoxId' : item.deviceBoxId});
   }

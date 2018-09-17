@@ -32,6 +32,7 @@ export class SettingPage {
   ionViewDidLoad() {
   }
 
+  //变更密码
   doChangePassword() {
     let options: NativeTransitionOptions = {
       direction: 'left',
@@ -43,12 +44,13 @@ export class SettingPage {
     this.navCtrl.push(ChangepasswordPage);
   }
 
+  //退出
   logout() {
     this.storage.clear().then((data) => {
       this.app.getRootNavs()[0].setRoot(LoginPage); 
     });
   }
-
+  //退出系统
   doExitSystem() {
     this.storage.clear().then((data) => {
       this.platform.exitApp();

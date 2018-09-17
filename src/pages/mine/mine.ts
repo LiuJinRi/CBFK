@@ -7,7 +7,6 @@ import { HandphonePage } from '../handphone/handphone';
 import { OrganizationPage } from '../organization/organization';
 import { SettingPage } from '../setting/setting';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
-import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the MinePage page.
@@ -39,49 +38,42 @@ export class MinePage {
   ionViewDidLoad() {
     
     this.storage.get('sysUserId').then((data) => { 
-      //console.log(data);
       if (data) {
         this.sysUserId = data;
       }
     });
 
     this.storage.get('headPortrait').then((data) => { 
-      //console.log(data);
       if (data) {
         this.headPortrait = this.httpProvider.API_URL + data;
       }
     });
 
     this.storage.get('userName').then((data) => { 
-      //console.log(data);
       if (data) {
         this.userName = data;
       }
     });
 
     this.storage.get('email').then((data) => { 
-      //console.log(data);
       if (data) {
         this.emailaddress = data;
       }
     });
 
     this.storage.get('organizationName').then((data) => { 
-      //console.log(data);
       if (data) {
         this.organizationName = data;
       }
     });
 
     this.storage.get('status').then((data) => { 
-      //console.log(data);
       if (data) {
         this.status = data;
       }
     });
 
     this.storage.get('phonenumber').then((data) => { 
-      //console.log(data);
       if (data) {
         this.phonenumber = data;
       }

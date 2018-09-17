@@ -8,13 +8,6 @@ import { SettingPage } from '../setting/setting';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { TabsPage } from '../tabs/tabs';
 
-/**
- * Generated class for the ChangepasswordPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-changepassword',
@@ -45,14 +38,10 @@ export class ChangepasswordPage {
       });
 
       storage.get('sysUserId').then((data) => { 
-        console.log(data);
         if (data) {
           this.sysUserId = data;
         }
       });
-      
-      
-      
     }
 
   ionViewDidLoad() {
@@ -74,55 +63,46 @@ export class ChangepasswordPage {
   }
 
   doResetPassword() {
+    this.storage.get('password').then((data) => { 
+      if (data) {
+        this.oldpassword = data;
+      }
+    });
+
+    if (this.cahngePasswordForm.value['password'] == "") {
+      this.toastProvider.show('请输入正确的旧密码', 'error')
+      return;
+    }
+
+    if (this.cahngePasswordForm.value['password'] != this.oldpassword) {
+      this.toastProvider.show('旧密码错误', 'error')
+      return;
+    }
     
-    //if (!this.cahngePasswordForm.valid) {
-      console.log(this.cahngePasswordForm.value['password']);
-      console.log(this.cahngePasswordForm.value['newpassword']);
-      console.log(this.cahngePasswordForm.value['newpassword1']);
+    if (this.cahngePasswordForm.value['newpassword'] == "") {
+      this.toastProvider.show('请输入正确的新密码', 'error')
+      return;
+    }
 
-      this.storage.get('password').then((data) => { 
-        console.log(data);
-        if (data) {
-          this.oldpassword = data;
-        }
-      });
+    if (this.cahngePasswordForm.value['newpassword1'] == "") {
+      this.toastProvider.show('请再次输入正确的新密码', 'error')
+      return;
+    }
 
-      if (this.cahngePasswordForm.value['password'] == "") {
-        this.toastProvider.show('请输入正确的旧密码', 'error')
-        return;
-      }
+    if (this.cahngePasswordForm.value['newpassword1'] != this.cahngePasswordForm.value['newpassword']) {
+      this.toastProvider.show('请再次输入正确的密码', 'error')
+      return;
+    }
 
-      if (this.cahngePasswordForm.value['password'] != this.oldpassword) {
-        this.toastProvider.show('旧密码错误', 'error')
-        return;
-      }
-      
-      if (this.cahngePasswordForm.value['newpassword'] == "") {
-        this.toastProvider.show('请输入正确的新密码', 'error')
-        return;
-      }
+    if (this.cahngePasswordForm.value['newpassword'] == this.password) {
+      this.toastProvider.show('不会用旧密码', 'error')
+      return;
+    }
 
-      if (this.cahngePasswordForm.value['newpassword1'] == "") {
-        this.toastProvider.show('请再次输入正确的新密码', 'error')
-        return;
-      }
-
-      if (this.cahngePasswordForm.value['newpassword1'] != this.cahngePasswordForm.value['newpassword']) {
-        this.toastProvider.show('请再次输入正确的密码', 'error')
-        return;
-      }
-
-      if (this.cahngePasswordForm.value['newpassword'] == this.password) {
-        this.toastProvider.show('不会用旧密码', 'error')
-        return;
-      }
-    //}
-    
     this.password = this.cahngePasswordForm.value['password'];
     this.newpassword = this.cahngePasswordForm.value['newpassword'];
 
     this.userProvider.changeSettingPassword(this.sysUserId, this.password, this.newpassword).then((data) => {
-      console.log(data);
       if (data['msg'] == "成功") {
         this.toastProvider.show("变更密码成功",'success');
         this.storage.set('password', this.newpassword);

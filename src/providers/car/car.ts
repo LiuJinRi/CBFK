@@ -1,25 +1,17 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
-import {Storage} from '@ionic/storage';
 import {HttpProvider} from '../http/http';
 import {URLSearchParams} from '@angular/http';
-import {App, Events, ModalController, Platform} from "ionic-angular";
-import {ToastProvider} from "../../providers/toast/toast";
-import { count } from '../../../node_modules/rxjs/operator/count';
 
 @Injectable()
 export class CarProvider {
 
-    constructor(public httpProvider: HttpProvider,
-                private storage: Storage,
-                private app: App,
-                private events: Events,
-                private modalCtrl: ModalController,
-                private toastProvider: ToastProvider,
-                private platform: Platform) {
+    constructor(public httpProvider: HttpProvider) {
 
     }
 
+
+    // 查询车辆
     findCarMsg(vincode, type, sysUserId, organizationId) {
 
         let param = {
@@ -30,14 +22,10 @@ export class CarProvider {
         };
         let body = JSON.stringify(param);
         return this.httpProvider.httpPostNoAuth("/common/car/findCarMsg", body);
-        /*
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('vincode', vincode);
-        params.set('type', type);
-        return this.httpProvider.httpGetWithAuth("/common/car/findCarMsg", params);
-        */
+
     }
 
+    //车辆详情
     detailCarMsg(carId, carType, organizationId) {
         let param = {
             carId: carId,
@@ -48,16 +36,9 @@ export class CarProvider {
         return this.httpProvider.httpPostNoAuth("/common/car/carMsg", body);
     }
 
+    // 绑定车辆
     carBindList(page, per_page, organizationId) {
-        /*
-        let param = {
-            total: page,
-            count: per_page
-        };
-        let body = JSON.stringify(param);
-        return this.httpProvider.httpPostWithAuth("/binding/binding/carMsgList", body);
-        */
-        
+
         let params: URLSearchParams = new URLSearchParams();
         console.log(page);
         console.log(organizationId);
@@ -68,6 +49,7 @@ export class CarProvider {
         
     }
 
+    //解绑定
     carUnBind(vincode, deviceBoxId, sysUserId, organizationId) {
         console.log(vincode);
         console.log(deviceBoxId);
@@ -82,6 +64,7 @@ export class CarProvider {
         return this.httpProvider.httpPostNoAuth("/binding/binding/untie", body);
     }
 
+    //扫一扫
     carBindScan(boxCode, vincode, sysUserId, organizationId) {
         let param = {
             boxCode: boxCode,
@@ -93,15 +76,9 @@ export class CarProvider {
         return this.httpProvider.httpPostNoAuth("/binding/binding/scan", body);
     }
 
+    // 等级列表
     carLevelList(page, per_page, organizationId) {
-        /*
-        let param = {
-            total: page,
-            count: per_page
-        };
-        let body = JSON.stringify(param);
-        return this.httpProvider.httpPostWithAuth("/cargrade/cargrade/carMsgList", body);
-        */
+
         let params: URLSearchParams = new URLSearchParams();
         params.set('total', page);
         params.set('count', per_page);
@@ -109,6 +86,7 @@ export class CarProvider {
         return this.httpProvider.httpGetNoAuth("/cargrade/cargrade/carMsgList", params);
     }
 
+    //再激活
     carReactivate(deviceBoxId) {
         let param = {
             deviceBoxId: deviceBoxId
@@ -117,6 +95,7 @@ export class CarProvider {
         return this.httpProvider.httpPostNoAuth("/cargrade/cargrade/secondActivation", body);
     }
 
+    //等级变更
     carLevelChange(carId, dangerLevel) {
         console.log(carId);
         console.log(dangerLevel);
@@ -128,6 +107,7 @@ export class CarProvider {
         return this.httpProvider.httpPostNoAuth("/cargrade/cargrade/setLevel", body);
     }
 
+    //车辆位置
     carLocate(deviceBoxId) {
         console.log(deviceBoxId);
         let param = {
@@ -137,6 +117,7 @@ export class CarProvider {
         return this.httpProvider.httpPostNoAuth("/cargrade/cargrade/lookLocation", body);
     }
 
+    //最新信息
     carInformation(deviceBoxId) {
         let param = {
             deviceBoxId: deviceBoxId
@@ -145,16 +126,8 @@ export class CarProvider {
         return this.httpProvider.httpPostNoAuth("/cargrade/cargrade/historicalTrack", body);
     }
 
+    //门禁列表
     carParkList(page, per_page, organizationId) {
-        /*
-        let param = {
-            total: page,
-            count: per_page,
-            organizationId : organizationId
-        };
-        let body = JSON.stringify(param);
-        return this.httpProvider.httpPostWithAuth("/doormonitor/doormonitor/carMsgList", body);
-        */
 
         let params: URLSearchParams = new URLSearchParams();
         params.set('total', page);
@@ -164,16 +137,9 @@ export class CarProvider {
 
     }
 
+    //类似车辆
     carParkSimilarList(page, per_page, carId, organizationId, vincode) {
-        /*
-        let param = {
-            total: page,
-            count: per_page,
-            carId : carId
-        };
-        let body = JSON.stringify(param);
-        return this.httpProvider.httpPostWithAuth("/common/car/doorMonitorMsg", body);
-        */
+
         let params: URLSearchParams = new URLSearchParams();
         params.set('total', page);
         params.set('count', per_page);
@@ -184,6 +150,7 @@ export class CarProvider {
 
     }
 
+    //车辆通过
     carParkPass(handleResult, marketDoubtId, sysUserId, organizationId) {
         
         let param = {
@@ -194,13 +161,7 @@ export class CarProvider {
         };
         let body = JSON.stringify(param);
         return this.httpProvider.httpPostNoAuth("/doormonitor/doormonitor/ifLetGo", body);
-        /*
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('handleResult', handleResult);
-        params.set('marketDoubtId', marketDoubtId);
-        params.set('sysUserId', sysUserId);
-        return this.httpProvider.httpGetNoAuth("/doormonitor/doormonitor/ifLetGo", params);
-        */
+
     }
 
 

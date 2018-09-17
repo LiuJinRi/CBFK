@@ -7,13 +7,6 @@ import {UserProvider} from "./../../providers/user/user";
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { TabsPage } from '../tabs/tabs';
 
-/**
- * Generated class for the ApplyOrganizationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-apply-organization',
@@ -32,7 +25,6 @@ export class ApplyOrganizationPage {
     public toastProvider : ToastProvider,
     private nativePageTransitions : NativePageTransitions) {
       storage.get('sysUserId').then((data) => { 
-        //console.log(data);
         if (data) {
           this.sysUserId = data;    
         }
@@ -54,7 +46,6 @@ export class ApplyOrganizationPage {
     } 
 
     this.storage.get('oragnizationTmp').then((data) => { 
-      //console.log(data);
       if (data) {
         this.organizationName = data;
       }
@@ -63,7 +54,6 @@ export class ApplyOrganizationPage {
     this.userProvider.applyOrganization(this.organizationName, this.sysUserId).then((data) => {
       console.log(data);
       if (data['msg'] == "成功") {
-        //this.storage.set('organizationName', this.organizationName);
         this.storage.set('status', 1);
         this.toastProvider.show("已申请加入" + this.organizationName + "组织。请等待申请结果！",'success');
 
@@ -91,7 +81,6 @@ export class ApplyOrganizationPage {
       this.userProvider.findOrganization(val).then((data)=>{
         var tmp = data['msg'];
         this.organizationName = tmp;
-        //console.log(this.organizationName);
         this.storage.set('oragnizationTmp', tmp);
       }).catch((err)=>{
         return;

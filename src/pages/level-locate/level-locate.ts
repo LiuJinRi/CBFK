@@ -30,11 +30,9 @@ export class LevelLocatePage {
 
   ionViewDidLoad() {
     console.log('Loading Amap');
-    //this.loadMap();
   }
 
   ionViewWillEnter() {
-    //let map = this.map = new BMap.Map(this.mapElement.nativeElement, { enableMapClick: true });
     this.map = new BMap.Map("container"); // 创建地图实例     
     
     this.carProvider.carLocate(this.deviceBoxId).then((data)=>{
@@ -45,7 +43,6 @@ export class LevelLocatePage {
         console.log(longitude);
         console.log(latitude);
         if (longitude != null && latitude != null ) {
-          //let point = new BMap.Point(longitude, latitude);//(116.06827, 22.549284);
           let point = new BMap.Point(longitude, latitude);
           this.map.centerAndZoom(point, 16);//设置中心和地图显示级别
           this.map.enableScrollWheelZoom();//启动滚轮放大缩小，默认禁用
@@ -80,9 +77,6 @@ export class LevelLocatePage {
   }
 
   goToHomePage() {
-     //push another page onto the history stack
-     //causing the nav controller to animate the new page in
-     //this.navCtrl.push(HomePage);
      this.navCtrl.pop();
   }
 

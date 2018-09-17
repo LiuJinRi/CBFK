@@ -48,7 +48,7 @@ export class MatchingDetailPage {
         }
       });
   }
-
+  //显示菜单
   presentPopover(myEvent) { 
     
     let popover = this.popoverCtrl.create(MacthingmenuPage, {
@@ -66,7 +66,7 @@ export class MatchingDetailPage {
   ionViewDidLoad() {
     this.getCarDetail();
   }
-
+  //详情
   getCarDetail() {
     this.carProvider.detailCarMsg(this.carId, this.carType, this.organizationId).then((data)=>{
       console.log(data);

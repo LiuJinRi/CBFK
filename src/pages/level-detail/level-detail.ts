@@ -5,14 +5,6 @@ import { LevelmenuPage } from '../levelmenu/levelmenu';
 import { CarProvider } from './../../providers/car/car';
 import {Storage} from '@ionic/storage';
 
-
-/**
- * Generated class for the LevelDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-level-detail',
@@ -34,7 +26,6 @@ export class LevelDetailPage {
       
       this.carId  = this.navParams.get('carId');
       this.carType = this.navParams.get('carType');
-      console.log(this.carId);
       storage.get('sysUserId').then((data) => { 
         console.log(data);
         if (data) {

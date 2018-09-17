@@ -64,7 +64,6 @@ export class ParkDetailPage {
       this.organizationId = this.navParams.get('organizationId');
 
       storage.get('sysUserId').then((data) => { 
-        //console.log(data);
         if (data) {
           this.sysUserId = data;
         }
@@ -89,10 +88,6 @@ export class ParkDetailPage {
   }
 
   getCarList(page) {
-    console.log(this.carId);
-    console.log(this.vincode);
-    console.log(this.organizationId);
-
     this.carProvider.carParkSimilarList(page, this.perPage, this.carId, this.organizationId, this.vincode ).then((data) => {
         console.log(data.rows);
         

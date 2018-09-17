@@ -2,13 +2,6 @@ import { Component } from '@angular/core';
 import { CarProvider } from './../../providers/car/car';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the LevelInformationPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-level-information',
@@ -28,6 +21,7 @@ export class LevelInformationPage {
     this.getNewsList();
   }
 
+  //获取最新信息
   getNewsList() {
     var items_tmp = [];
     this.items = items_tmp;
@@ -43,6 +37,7 @@ export class LevelInformationPage {
     });
   }
 
+  //过滤项目
   filterItems(ev: any) {
     
     let val = ev.target.value;

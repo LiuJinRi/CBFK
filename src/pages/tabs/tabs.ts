@@ -27,20 +27,15 @@ export class TabsPage {
     public navCtrl: NavController,
   ) {
     
-
+    //查看用户组织状态
     storage.get('status').then((data) => { 
-      //console.log(data);
-      //if (data) {
-        this.status = data;
-        //console.log(this.status);
-      //}
+      this.status = data;
       if ( this.status != "3" ) {
         this.isEnable = false;
       } 
-
-      //this.isEnable = true;
     });
 
+    //获取tabs index
     if (this.navParams.data) {
       this.tabindex = this.navParams.get('tabindex');
     }

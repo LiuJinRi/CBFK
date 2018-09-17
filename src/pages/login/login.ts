@@ -8,14 +8,6 @@ import {ToastProvider} from "./../../providers/toast/toast";
 import {Storage} from '@ionic/storage';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -72,6 +64,7 @@ export class LoginPage {
   ionViewDidLoad() {
   }
 
+  //登录
   doLogin() { 
     if (this.loginName.length == 0) {
       this.toastProvider.show("请输入账号", 'success');
@@ -79,8 +72,6 @@ export class LoginPage {
       this.toastProvider.show("请输入密码", 'success');
     } else {
       this.userProvider.login(this.loginName, this.password).then((response) => {
-        //console.log(response);
-        //console.log(response.rows[0]);
         if ( response['msg'] != "成功") {
           console.log(response);
           this.toastProvider.show(response['msg'], 'error');
@@ -109,8 +100,6 @@ export class LoginPage {
           this.storage.set('token', token);//后加的
 
           console.log(status);
-
-          //this.storage.set('isRemember', this.isRemember);
           
           if (this.isRemember) {
             this.storage.set('loginName', this.loginName);
@@ -121,11 +110,7 @@ export class LoginPage {
           console.log(this.isRemember);
           this.storage.set('isRemember', this.isRemember ? 1 : 0)
 
-          //console.log(organizationName);
-          //console.log(this.isRemember);
-
           if ( organizationName == null) {
-            //console.log('organization!!');
             this.toastProvider.show("请您先登录组织名",'success');
           }
 
@@ -151,11 +136,13 @@ export class LoginPage {
       }
   }
 
+  //显示密码
   showPassword($event) {
     $event.preventDefault();
     this.isShowPassword = !this.isShowPassword;
   }
 
+  //注册
   register() {
     let options: NativeTransitionOptions = {
       direction: 'right',
@@ -166,8 +153,9 @@ export class LoginPage {
  
     this.nativePageTransitions.slide(options);
     this.navCtrl.push(RegisterPage);
-    }
+  }
   
+  //忘记密码
   resetpassword() {
     let options: NativeTransitionOptions = {
       direction: 'right',
