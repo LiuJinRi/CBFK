@@ -38,7 +38,7 @@ export class UserProvider {
         params.set('password', password);
         params.set('verificationCode', verificationCode);
         params.set('userName', userName);
-        params.set('phonenumber', phonenumber);
+        params.set('phoneNumber', phonenumber);
         params.set('email', email);
         return this.httpProvider.httpGetNoAuth("/sys/login/sysRegister", params);
     }
